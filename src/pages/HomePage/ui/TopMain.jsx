@@ -15,7 +15,6 @@ const TopMain = () => {
     return (
         <div className="w-full h-auto relative bg-white">
             <img className="w-full h-full z-0 object-center top-0" src="/photoes/main/main-top.webp" alt="" />
-            <img className="w-full h-full z-10 object-center top-0" src="/photoes/main/RightBlock.png" alt="" />
             <div className="backdrop-blur-xl z-10 w-full lg:h-[130px] h-[60px] absolute top-0 left-0 flex flex-row items-center justify-between !px-20">
                 <img className="w-[110px]" src="/photoes/main/MNEIDET.svg" alt="" />
                 <div className="lg:flex flex-row xl:gap-[35px] gap-[20px] items-center justify-end hidden">
