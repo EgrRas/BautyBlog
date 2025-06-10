@@ -64,7 +64,7 @@ const Carusel = () => {
                     </Swiper>
 
                     <div className="swiper-next absolute -right-20 top-[45%] -translate-y-1/2 z-10 w-16 h-16 flex items-center justify-center cursor-pointer bg-white">
-                        <img className="w-full" src="/photoes/main/NextButton.png" />
+                        <img className="w-full" src="/photos/main/NextButton.png" />
                     </div>
 
                     <div className="w-full flex justify-center">
