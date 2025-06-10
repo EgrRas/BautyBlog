@@ -37,8 +37,8 @@ const TopMain = () => {
             <div className="absolute left-1/2 transform -translate-x-1/2 top-[85%] w-[240px] h-[50px] flex items-center justify-center rounded-full bg-[#23274B] text-white uppercase">
                 Узнай свой типаж
             </div>
-            <img className={`absolute z-20 left-0 transform ease-in-out duration-2000 ${isBouncing === true ? "top-[10%]" : "top-[5%]" }`} src="/photos/main/Soplya.png" alt=""/>
-            <img className={`absolute z-20 right-0 transform ease-in-out duration-2000 ${isBouncing === true ? "top-[0%]" : "-top-[5%]" }`} src="/photos/main/Soplya3.png" alt=""/>
+            <img style={{ transitionDuration: '2000ms' }} className={`absolute z-20 left-0 transform ease-in-out ${isBouncing === true ? "top-[10%]" : "top-[5%]" }`} src="/photos/main/Soplya.png" alt=""/>
+            <img style={{ transitionDuration: '2000ms' }} className={`absolute z-20 right-0 transform ease-in-out ${isBouncing === true ? "top-[0%]" : "-top-[5%]" }`} src="/photos/main/Soplya3.png" alt=""/>
 
         </div>
     );

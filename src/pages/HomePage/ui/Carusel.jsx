@@ -6,11 +6,11 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 const clients = [
-    "photoes/main/womans/Woman1.png",
-    "photoes/main/womans/Woman2.png",
-    "photoes/main/womans/Woman3.png",
-    "photoes/main/womans/Woman4.png",
-    "photoes/main/womans/Woman5.png",
+    "photos/main/womans/Woman1.png",
+    "photos/main/womans/Woman2.png",
+    "photos/main/womans/Woman3.png",
+    "photos/main/womans/Woman4.png",
+    "photos/main/womans/Woman5.png",
 ];
 
 const Carusel = () => {
