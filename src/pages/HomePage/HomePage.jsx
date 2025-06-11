@@ -10,7 +10,7 @@ import Footer from "./ui/Footer.jsx";
 
 const HomePage = () => {
     return (
-        <div>
+        <div className="overflow-x-hidden">
             <TopMain />
             <CenterFirst />
             <WhyMain />

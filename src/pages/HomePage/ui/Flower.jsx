@@ -18,7 +18,7 @@ const Flower = () => {
                     что действительно тебе идет?
                 </p>
 
-                <p className="font-montserrat text-[12px] uppercase font-light text-center mt-20">оформи прямо сейчас и получи скидку 50%</p>
+                <p className="font-montserrat text-[12px] uppercase font-light text-center lg:mt-20 mt-5">оформи прямо сейчас и получи скидку 50%</p>
 
                 <div className="md:w-[500px] w-full backdrop-blur-2xl flex flex-row sm:gap-20 gap-10 sm:p-12 p-5 items-center justify-center mt-4 rounded-2xl ">
                     <p className="font-unbounded text-[30px]">3990 ₽</p>
