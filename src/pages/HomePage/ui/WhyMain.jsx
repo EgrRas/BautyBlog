@@ -8,7 +8,7 @@ const WhyMain = () => {
                     Почему стоит выбирать <br/>
                     MNE IDET?
                 </p>
-                <div className="w-full flex flex-col gap-[10px] bg-[#90A3AB]/37 shadow-[0_0_60px_20px_rgba(144,163,171,0.5)]">
+                <div className="w-full flex flex-col gap-[10px] bg-[#90A3AB]/37 shadow-[0_0_60px_20px_rgba(144,163,171,0.5)]" style={{ backgroundColor: 'rgba(144, 163, 171, 0.37)' }}>
                     <div className="w-full rounded-xl h-[109px] bg-white flex items-center justify-between px-10">
                         <p className="uppercase"> <span className="text-[#8296A6] font-semibold">Индивидуальность </span> вместо трендов и шаблонов</p>
                         <img className="w-5" src="/photos/main/Subtract.svg" alt="" />

@@ -4,6 +4,7 @@ import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import "../../../index.css"
 
 const clients = [
     "photos/main/womans/Woman1.png",
@@ -15,8 +16,9 @@ const clients = [
 
 const Carusel = () => {
     return (
-        <div className="w-full flex justify-center mt-32 px-4">
-            <div className="w-full max-w-[1000px]">
+        <div className="w-full flex justify-center mt-32 px-4 relative">
+            <img src="/photos/main/Lines.png" alt="" className="w-full absolute bottom-0 z-0" />
+            <div className="w-full max-w-[1000px] z-10">
                 <p className="text-[40px] lg:text-[53px] font-unbounded font-light uppercase text-[#1B3C4D] leading-tight">
                     Клиенты, которые уже работают по системе{" "}
                     <span className="text-[#8296A6] font-medium">MNE IDET</span>
@@ -39,10 +41,10 @@ const Carusel = () => {
                             prevEl: ".swiper-prev",
                         }}
                         pagination={{
-                            el: ".swiper-pagination",
+                            el: ".custom-swiper-pagination",
                             clickable: true,
                             renderBullet: (index, className) => {
-                                return `<span class="${className} inline-block w-4 h-4 mx-1 rounded-full !bg-black transition-all duration-300"></span>`;
+                                return `<span class="${className}"></span>`;
                             },
                         }}
                         breakpoints={{
@@ -57,7 +59,7 @@ const Carusel = () => {
                                 <img
                                     src={src}
                                     alt={`client-${index}`}
-                                    className="rounded-3xl w-full h-[400px] object-cover"
+                                    className="rounded-3xl w-full h-[400px] object-cover hover:scale-105 transition duration-200"
                                 />
                             </SwiperSlide>
                         ))}
@@ -67,13 +69,16 @@ const Carusel = () => {
                         <img className="w-full" src="/photos/main/NextButton.png" />
                     </div>
 
-                    <div className="w-full flex justify-center">
-                        <div className="swiper-pagination absolute border-2 border-black bottom-2 left-0 w-full flex justify-center z-10" />
-                    </div>
+                    <div className="custom-swiper-pagination swiper-pagination ml-[40%]" />
 
                     <p className="absolute top-[420px] left-10 text-[12px] underline cursor-pointer">
                         Смотреть больше фото
                     </p>
+                </div>
+                <div className="w-full flex justify-center mt-32 pb-5">
+                    <div className="w-[240px] h-[50px] flex items-center justify-center rounded-full bg-[#23274B] text-white uppercase">
+                        узнать свой типаж
+                    </div>
                 </div>
             </div>
         </div>
