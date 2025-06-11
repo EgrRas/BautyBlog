@@ -1,4 +1,5 @@
 import React from 'react';
+import SectionWrapper from "../../../hoc/SectionWrapper.jsx";
 
 const WhyMain = () => {
     return (
@@ -36,4 +37,4 @@ const WhyMain = () => {
     );
 };
 
-export default WhyMain;
+export default SectionWrapper(WhyMain , 'why-main');

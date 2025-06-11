@@ -1,4 +1,5 @@
 import React from 'react';
+import SectionWrapper from "../../../hoc/SectionWrapper.jsx";
 
 const Carusel2 = () => {
     return (
@@ -52,4 +53,4 @@ const Carusel2 = () => {
     );
 };
 
-export default Carusel2;
+export default SectionWrapper(Carusel2 , 'examples');

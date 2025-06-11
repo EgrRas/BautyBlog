@@ -1,4 +1,5 @@
 import React from 'react';
+import SectionWrapper from "../../../hoc/SectionWrapper.jsx";
 
 const CenterFirst = () => {
 
@@ -56,4 +57,4 @@ const CenterFirst = () => {
     );
 };
 
-export default CenterFirst
+export default SectionWrapper(CenterFirst, 'about')

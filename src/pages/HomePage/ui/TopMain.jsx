@@ -26,11 +26,11 @@ const TopMain = () => {
                 <img className="w-[110px]" src="/photos/main/MNEIDET.svg" alt="" />
                 <img src="/photos/main/Burger.svg" className="h-[20px] lg:hidden block cursor-pointer" alt="" onClick={() => setIsOpen(!isOpen)}/>
                 <div className="lg:flex flex-row xl:gap-[35px] gap-[20px] items-center justify-end hidden">
-                    <button className="font-montserrat font-medium text-[16px] text-white whitespace-nowrap cursor-pointer">Преимущества</button>
-                    <button className="font-montserrat font-medium text-[16px] text-white whitespace-nowrap cursor-pointer">О сервисе</button>
-                    <button className="font-montserrat font-medium text-[16px] text-white whitespace-nowrap cursor-pointer">Ответы на вопросы</button>
-                    <button className="font-montserrat font-medium text-[16px] text-white whitespace-nowrap cursor-pointer">Примеры результатов</button>
-                    <button className="px-3 py-2 rounded-full !border text-[16px] !border-white font-light uppercase text-white font-unbounded cursor-pointer">войти</button>
+                    <a className="font-montserrat font-medium text-[16px] text-white whitespace-nowrap cursor-pointer" href='#why-main'>Преимущества</a>
+                    <a className="font-montserrat font-medium text-[16px] text-white whitespace-nowrap cursor-pointer" href='#about'>О сервисе</a>
+                    <a className="font-montserrat font-medium text-[16px] text-white whitespace-nowrap cursor-pointer" href='#questions'>Ответы на вопросы</a>
+                    <a className="font-montserrat font-medium text-[16px] text-white whitespace-nowrap cursor-pointer" href='#examples'>Примеры результатов</a>
+                    <a className="px-3 py-2 rounded-full !border text-[16px] !border-white font-light uppercase text-white font-unbounded cursor-pointer">войти</a>
                 </div>
             </div>
             <div className="absolute z-10 lg:top-36 top-[300px] lg:left-[20%] lg:w-[250px] w-full lg:text-left text-center lg:p-0 p-16">
@@ -57,10 +57,10 @@ const TopMain = () => {
                 </div>
                 <div className="w-full flex flex-col items-center justify-center">
                     <div className="flex flex-col gap-5 sm:mt-[7%] mt-[20%]">
-                        <button className="font-montserrat font-medium text-[16px] text-white whitespace-nowrap cursor-pointer">Преимущества</button>
-                        <button className="font-montserrat font-medium text-[16px] text-white whitespace-nowrap cursor-pointer">О сервисе</button>
-                        <button className="font-montserrat font-medium text-[16px] text-white whitespace-nowrap cursor-pointer">Ответы на вопросы</button>
-                        <button className="font-montserrat font-medium text-[16px] text-white whitespace-nowrap cursor-pointer">Результаты</button>
+                        <a className="font-montserrat font-medium text-[16px] text-white whitespace-nowrap cursor-pointer" href='#why-main'>Преимущества</a>
+                        <a className="font-montserrat font-medium text-[16px] text-white whitespace-nowrap cursor-pointer" href='#about'>О сервисе</a>
+                        <a className="font-montserrat font-medium text-[16px] text-white whitespace-nowrap cursor-pointer"  href='#questions'>Ответы на вопросы</a>
+                        <a className="font-montserrat font-medium text-[16px] text-white whitespace-nowrap cursor-pointer" href='#examples' >Результаты</a>
                     </div>
                     <div className="flex w-full flex-col gap-3 items-center justify-center sm:mt-[7%] mt-[20%]">
                         <div className="w-16 h-16 border rounded-full border-white flex items-center justify-center">
