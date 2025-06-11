@@ -6,6 +6,7 @@ import Carusel from "./ui/Carusel.jsx";
 import Qwestions from "./ui/Qwestions.jsx";
 import Carusel2 from "./ui/Carusel2.jsx";
 import Flower from "./ui/Flower.jsx";
+import Footer from "./ui/Footer.jsx";
 
 const HomePage = () => {
     return (
@@ -17,6 +18,7 @@ const HomePage = () => {
             <Qwestions />
             <Carusel2 />
             <Flower />
+            <div className="w-full h-auto z-30"> <Footer /> </div>
         </div>
     );
 };

@@ -45,7 +45,7 @@ const CenterFirst = () => {
                     <img style={{ transitionDuration: '2000ms' }} className={`absolute transform ease-in-out ${isBouncing === true ? "-rotate-10 -top-[180px]" : "-rotate-7 -top-[170px]"}`} src="/photos/main/Soplya2.png" alt="" />
                     <img className="absolute w-80 top-[130px]" src="/photos/main/Mobilka.png" alt="" />
                     <img className="absolute w-[500px] top-[500px] left-20" src="/photos/main/MiddleWoman.png" alt=""/>
-                    <div className="absolute left-1/2 transform -translate-x-1/2 top-[850px] w-[240px] h-[50px] flex items-center justify-center rounded-full bg-[#23274B] text-white uppercase">
+                    <div className="absolute left-1/2 transform text-[14px] font-light -translate-x-1/2 top-[850px] w-[240px] h-[50px] flex items-center justify-center rounded-full bg-[#23274B] text-white uppercase cursor-pointer hover:shadow-xl transition duration-200">
                         начать сейчас
                     </div>
                 </div>

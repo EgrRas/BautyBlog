@@ -76,7 +76,7 @@ const Carusel = () => {
                     </p>
                 </div>
                 <div className="w-full flex justify-center mt-32 pb-5">
-                    <div className="w-[240px] h-[50px] flex items-center justify-center rounded-full bg-[#23274B] text-white uppercase">
+                    <div className="w-[240px] h-[50px] text-[14px] font-light flex items-center justify-center rounded-full bg-[#23274B] text-white uppercase cursor-pointer hover:shadow-xl transition duration-200">
                         узнать свой типаж
                     </div>
                 </div>

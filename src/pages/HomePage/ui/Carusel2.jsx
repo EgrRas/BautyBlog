@@ -10,34 +10,43 @@ const Carusel2 = () => {
                     стиль с SuitesMe
                 </p>
             </div>
+
             <div className="w-full pb-32 overflow-hidden">
                 <div
-                    className="flex flex-row"
+                    className="flex"
                     style={{
-                        width: 'calc(3 * 3 * 320px)', // 3 картинки * 3 раза по 320px ширина примерно
-                        animation: 'scrollLeft 15s linear infinite',
+                        width: '200%',
+                        animation: 'scrollLeft 30s linear infinite',
                     }}
                 >
-                    {[...Array(3)].map((_, i) =>
-                        [1, 2, 3].map((n) => (
-                            <img
-                                key={`${i}-${n}`}
-                                className="h-80 w-[1020px] object-cover"
-                                src="/photos/main/Circulation.png"
-                                alt=""
-                            />
-                        ))
-                    )}
+                    {/* Один набор картинок */}
+                    {[1, 2, 3].map((n) => (
+                        <img
+                            key={`a-${n}`}
+                            className="h-80 w-[100vw] object-cover"
+                            src="/photos/main/Circulation.png"
+                            alt=""
+                        />
+                    ))}
+                    {/* Повтор того же набора */}
+                    {[1, 2, 3].map((n) => (
+                        <img
+                            key={`b-${n}`}
+                            className="h-80 w-[100vw] object-cover"
+                            src="/photos/main/Circulation.png"
+                            alt=""
+                        />
+                    ))}
                 </div>
             </div>
 
             <style>{`
         @keyframes scrollLeft {
           0% {
-            transform: translateX(0);
+            transform: translateX(0%);
           }
           100% {
-            transform: translateX(-33.33%);
+            transform: translateX(-50%);
           }
         }
       `}</style>
