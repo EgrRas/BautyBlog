@@ -14,7 +14,7 @@ const SectionWrapper = (Component , idName)=>
         
         >
 
-            <span className="hah-span" id={idName}>
+            <span className="hah-span h-[0.05px]" id={idName}>
                 &nbsp;
             </span>
             <Component/>
