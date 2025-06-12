@@ -7,9 +7,14 @@ const Register = () => {
 
     return (
         <div className="w-full min-h-screen flex justify-center items-center">
-            <div className="w-[400px]">
-                <div className="w-full flex flex-col gap-10">
-                    <p className="font-unbounded text-left uppercase font-medium text-[20px]">СОЗДАТЬ АККАУНТ</p>
+            <div className="w-[400px] md:h-[780px] h-[800px] sm:p-0 p-5">
+                <div className="w-full flex flex-col gap-10 relative">
+                    <div className="md:hidden flex flex-row items-center justify-between w-full">
+                        <img src="/photos/Auth/Back.svg" alt="" className="cursor-pointer"/>
+                        <img src="/photos/Auth/Star.svg" alt="" />
+                    </div>
+                    <img className="md:block hidden absolute -left-20" src="/photos/Auth/Back.svg" alt=""/>
+                    <p className="font-unbounded text-left sm:uppercase font-medium text-[20px]">создать аккаунт</p>
                     <div className="w-full flex flex-col gap-2">
                         {[
                             { label: "ИМЯ" },
@@ -23,7 +28,6 @@ const Register = () => {
                             </div>
                         ))}
 
-                        {/* Пароль */}
                         <div className="w-full flex flex-col gap-1">
                             <p className="uppercase font-montserrat text-[12px] font-medium text-[#1B3C4D]">пароль</p>
                             <div className="relative">
@@ -50,7 +54,6 @@ const Register = () => {
                             </div>
                         </div>
 
-                        {/* Подтвердите пароль */}
                         <div className="w-full flex flex-col gap-1">
                             <p className="uppercase font-montserrat text-[12px] font-medium text-[#1B3C4D]">подтвердите пароль</p>
                             <div className="relative">
@@ -89,7 +92,7 @@ const Register = () => {
                     <button className="w-full bg-[#1B3C4D] py-5 rounded-2xl">
                         <p className="uppercase font-unbounded font-light text-white">зарегистрироваться</p>
                     </button>
-                    <div className="text-center uppercase font-montserrat text-[#8296A6] text-[12px]">же есть аккаунт? <span className="cursor-pointer text-black">Войти</span> </div>
+                    <div className="text-center uppercase font-montserrat text-[#8296A6] text-[12px]">уже есть аккаунт? <span className="cursor-pointer text-black">Войти</span> </div>
                     <div className="w-full flex justify-center">
                         <img src="/photos/Auth/Register/cross-svgrepo-com.svg" className="w-8 cursor-pointer" alt=""/>
                     </div>
