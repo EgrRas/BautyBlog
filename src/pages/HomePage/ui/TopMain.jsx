@@ -68,7 +68,7 @@ const TopMain = () => {
                     <img src="/photos/main/cross-svgrepo-com.svg" alt="" className="absolute right-5 top-3 w-[36px] cursor-pointer" onClick={() => setIsOpen(!isOpen)}/>
                 </div>
                 <div className="w-full flex flex-col items-center justify-center">
-                    <div className="flex flex-col gap-5 sm:mt-[7%] mt-[20%]">
+                    <div className="flex flex-col gap-5 sm:mt-[7%] mt-[20%] text-center">
                         <a className="font-montserrat font-medium text-[16px] text-white whitespace-nowrap cursor-pointer" href='#why-main'>Преимущества</a>
                         <a className="font-montserrat font-medium text-[16px] text-white whitespace-nowrap cursor-pointer" href='#about'>О сервисе</a>
                         <a className="font-montserrat font-medium text-[16px] text-white whitespace-nowrap cursor-pointer"  href='#questions'>Ответы на вопросы</a>

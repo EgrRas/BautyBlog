@@ -28,7 +28,7 @@ const Carusel = () => {
                 </p>
 
                 <p className="text-[12px] uppercase pt-10 lg:w-auto w-[70%] lg:text-left text-center">
-                    Нажмите на фото, чтобы посмотреть кейс
+                    Нажмите на фото,<br/> чтобы посмотреть кейс
                 </p>
 
                 <div className="mt-10 relative pb-24">
@@ -66,15 +66,21 @@ const Carusel = () => {
                         ))}
                     </Swiper>
 
-                    <div className="swiper-next absolute lg:-right-20 right-2 -top-20 lg:top-[45%] lg:-translate-y-1/2 z-10 lg:w-16 w-10 lg:h-16 h-10 flex items-center justify-center cursor-pointer bg-white">
+                    <div className="swiper-next absolute lg:-right-20 right-6 -top-20 lg:top-[45%] lg:-translate-y-1/2 z-10 lg:w-16 w-10 lg:h-16 h-10 flex items-center justify-center cursor-pointer bg-white">
                         <img className="w-full" src="/photos/main/NextButton.png" alt=""/>
                     </div>
 
                     <div className="custom-swiper-pagination swiper-pagination lg:ml-[40%] ml-[18%]" />
 
-                    <p className="absolute top-[420px] left-10 text-[12px] underline cursor-pointer">
+                    <p className="absolute lg:block hidden top-[420px] left-10 text-[12px] underline cursor-pointer">
                         Смотреть больше фото
                     </p>
+
+                    <div className="absolute lg:hidden top-[420px] left-10 text-[12px] cursor-pointer flex flex-row items-center font-thin justify-start gap-1">
+                        <p>Больше фото</p>
+                        <div className="bg-gray-200 rounded-full text-black w-4 h-4 flex items-center justify-center text-[16px] font-thin pb-[2px]">+</div>
+                    </div>
+
                 </div>
                 <div className="w-full flex justify-center lg:mt-32 mt-10 pb-5">
                     <div className="w-[240px] h-[50px] text-[14px] font-light flex items-center justify-center rounded-full bg-[#23274B] text-white uppercase cursor-pointer hover:shadow-xl transition duration-200">
