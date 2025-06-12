@@ -31,7 +31,7 @@ const Carusel2 = () => {
                     {[1, 2, 3].map((n) => (
                         <img
                             key={`b-${n}`}
-                            className="h-80 lg:w-[100vw] w-[120vw] object-cover"
+                            className="lg:h-80 lg:w-[100vw] h-auto object-cover"
                             src="/photos/main/Circulation.png"
                             alt=""
                         />

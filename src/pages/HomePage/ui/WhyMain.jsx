@@ -3,9 +3,9 @@ import SectionWrapper from "../../../hoc/SectionWrapper.jsx";
 
 const WhyMain = () => {
     return (
-        <div className="w-full flex justify-center mt-40">
+        <div className="w-full flex justify-center lg:mt-40 mt-0">
             <div className="lg:w-[1000px] w-full p-5 flex flex-col gap-5">
-                <p className="lg:text-[30px] text-[23px] font-extrabold lg:text-left text-center font-unbounded text-[#1B3C4D] pt-32">
+                <p className="lg:text-[30px] text-[23px] font-extrabold lg:text-left text-center font-unbounded text-[#1B3C4D] lg:pt-32 pt-0">
                     Почему стоит выбирать <br/>
                     MNE IDET?
                 </p>

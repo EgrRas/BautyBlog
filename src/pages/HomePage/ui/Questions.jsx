@@ -30,7 +30,7 @@ const Questions = () => {
 
     return (
         <div className="w-full flex justify-center mt-32">
-            <div className="lg:w-[1000px] w-full lg:bg-white bg-[#C2CED8] lg:p-0 px-5 py-7 flex flex-col gap-5">
+            <div className="lg:w-[1000px] w-full lg:bg-white bg-[#C2CED8] lg:rounded-none rounded-2xl lg:p-0 px-5 py-7 flex flex-col gap-5">
                 <p className="text-[25px]  font-unbounded lg:text-left text-center font-extrabold text-[#1B3C4D]">Ответы на вопросы</p>
 
                 <div className="w-full">

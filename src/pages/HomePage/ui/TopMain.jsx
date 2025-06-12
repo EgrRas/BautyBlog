@@ -15,10 +15,22 @@ const TopMain = () => {
 
     return (
         <div className="w-full lg:h-auto h-[700px] relative bg-white">
-            <img className="lg:w-full lg:h-auto h-[400px] object-cover z-0 top-0" src="/photos/main/main-top.webp" alt="" />
-            <div className="relative lg:hidden h-[300px] bg-[rgba(130,148,155,0.7)] overflow-visible">
-                <div className="absolute bottom-[-10px] left-0 w-full h-[200px] blur-[60px] bg-gradient-to-t from-white via-gray-100 to-[rgba(130,148,155,0.1)] z-0" />
-            </div>
+            <img className="lg:w-full lg:h-auto h-[400px] object-cover lg:ml-0 z-0 top-0 lg:block hidden" src="/photos/main/main-top.webp" alt="" />
+            <img className="w-full h-[400px] object-cover z-0 top-0 lg:hidden" src="/photos/main/top-main2.png" alt="" />
+
+
+            <img
+                className="absolute top-[350px] w-full md:h-[400px] sm:h-[300px] h-[250px] lg:hidden object-cover"
+                src="/photos/main/TopBlur.svg"
+                alt=""
+            />
+            <img
+                className="lg:hidden absolute md:top-[650px] sm:top-[550px] top-[500px] w-full h-[100px] object-cover"
+                src="/photos/main/BottomBlur.png"
+                alt=""
+            />
+
+
             <img className="h-full w-[50%]  z-10 absolute top-0 right-0 lg:block hidden" src="/photos/main/Rectangle.png" alt="" />
             <img className="h-full w-[30%]  z-10 absolute top-0 right-0 lg:block hidden" src="/photos/main/Rectangle.png" alt="" />
             <div className="backdrop-blur-xl z-30 w-full lg:h-[130px] h-[60px] absolute top-0 left-0 flex flex-row items-center justify-between lg:px-20 px-5">
@@ -41,14 +53,14 @@ const TopMain = () => {
                     Наш искусственный интеллект анализирует черты лица и определяет типаж по системе
                     <span className="block font-semibold">MNE IDET</span>
                 </p>
-                <div className="lg:hidden mx-auto mt-10 top-[85%] w-[240px] h-[50px] flex items-center justify-center rounded-full bg-[#23274B] text-white uppercase text-[14px] font-light cursor-pointer hover:shadow-xl transition duration-200">
+                <div className="lg:hidden mx-auto md:mt-10 mt-5 top-[85%] w-[240px] h-[50px] flex items-center justify-center rounded-full bg-[#23274B] text-white uppercase text-[14px] font-light cursor-pointer hover:shadow-xl transition duration-200">
                     Узнай свой типаж
                 </div>
             </div>
             <div className="absolute left-1/2 transform -translate-x-1/2 top-[85%] w-[240px] h-[50px] lg:flex hidden items-center justify-center rounded-full bg-[#23274B] text-white uppercase text-[14px] font-light cursor-pointer hover:shadow-xl transition duration-200">
                 Узнай свой типаж
             </div>
-            <img style={{ transitionDuration: '2000ms' }} className={`absolute w-auto z-20 transform ease-in-out lg:left-0 md:-left-[20%] -left-[50%] ${isBouncing ? "top-[10%]" : "top-[5%]" }`} src="/photos/main/Soplya.png" alt=""/>
+            <img style={{ transitionDuration: '2000ms' }} className={`absolute w-auto z-20 transform ease-in-out lg:left-0 md:-left-[50%] -left-[70%] ${isBouncing ? "top-[10%]" : "top-[5%]" }`} src="/photos/main/Soplya.png" alt=""/>
             <img style={{ transitionDuration: '2000ms' }} className={`absolute z-20 lg:right-0 md:-right-[20%] -right-[50%] transform ease-in-out ${isBouncing ? "top-[0%]" : "-top-[5%]" }`} src="/photos/main/Soplya3.png" alt=""/>
             <div className={`${isOpen ? "flex" : "hidden"} w-full z-50 absolute top-0 left-0 flex-col bg-[rgb(130,148,155)] h-full`}>
                 <div className="w-full flex mt-5">

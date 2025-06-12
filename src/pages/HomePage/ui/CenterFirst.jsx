@@ -19,7 +19,7 @@ const CenterFirst = () => {
             <div className="absolute top-0 left-0 w-full h-full bg-white"/>
 
             <div className="lg:w-[1000px] w-full lg:p-0 p-5 relative flex flex-col gap-5">
-                <p className="lg:text-[30px] text-[23px] lg:text-left text-center font-unbounded font-extrabold text-[#1B3C4D] pt-32">
+                <p className="lg:text-[30px] text-[23px] lg:text-left text-center font-unbounded font-extrabold text-[#1B3C4D] lg:pt-32 pt-5">
                     Как это работает?
                 </p>
                 <p className="lg:text-[60px] text-[26px] font-unbounded font-light text-[#1B3C4D] uppercase">

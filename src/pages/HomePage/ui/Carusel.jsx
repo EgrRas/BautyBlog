@@ -16,9 +16,9 @@ const clients = [
 
 const Carusel = () => {
     return (
-        <div className="w-full flex justify-center lg:mt-32 mt-10 px-4 relative">
+        <div className="w-full flex justify-center lg:mt-32 mt-10 pl-4 relative">
             <img src="/photos/main/Lines.png" alt="" className="w-full absolute bottom-0 z-0 lg:block hidden" />
-            <div className="w-full lg:max-w-[1000px] z-10">
+            <div className="w-full lg:w-[1000px] z-10">
                 <p className="lg:hidden text-[23px] text-center font-unbounded font-extrabold text-[#1B3C4D] pb-10">
                     Как это работает?
                 </p>
