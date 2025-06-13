@@ -57,6 +57,11 @@ const ForgotPassword = () => {
 
 
 
+    const onSubmit = async (formValues) => {
+        setStep(1);
+        await handleForgotPasswordSubmit(formValues);
+    };
+
     const validationRules = {
         email: [
             { type: 'required', message: 'Email обязателен' },
@@ -80,13 +85,54 @@ const ForgotPassword = () => {
         values,
         errors,
         handleChange,
-        handleSubmit
     } = useForm(
         { email: '' },
         validationRules,
         handleForgotPasswordSubmit
     );
 
+    const passwordValidationRules = {
+        password: [
+            { type: 'required', message: 'Пароль обязателен' },
+            { type: 'minLength', value: 6, message: 'Пароль должен содержать минимум 6 символов' }
+        ],
+        password_confirm: [
+            { type: 'required', message: 'Подтверждение пароля обязательно' },
+            { type: 'match', field: 'password', message: 'Пароли не совпадают' }
+        ]
+    };
+
+    const handlePasswordResetSubmit = async (values) => {
+        const resetToken = code.join('');
+        if (resetToken.length < 4) {
+            throw new Error('Неверный код подтверждения');
+        }
+
+        try {
+            await publicApi.post('/api/v1/auth/password/reset', {
+                reset_token: resetToken,
+                password: values.password,
+                password_confirm: values.password_confirm,
+            });
+            setStep(3); // успех
+            return true;
+        } catch (error) {
+            console.error('Ошибка при сбросе пароля:', error);
+            throw new Error(error.response?.data?.message || 'Ошибка при сбросе пароля. Попробуйте снова.');
+        }
+    };
+
+    const {
+        values: passwordValues,
+        errors: passwordErrors,
+        handleChange: handlePasswordChange,
+        handleSubmit: handlePasswordSubmit,
+        isSubmitting: isPasswordSubmitting
+    } = useForm(
+        { password: '', password_confirm: '' },
+        passwordValidationRules,
+        handlePasswordResetSubmit
+    );
 
     return (
         <div>
@@ -105,6 +151,7 @@ const ForgotPassword = () => {
                                 <p className="font-unbounded text-left md:uppercase font-medium text-[20px]">забыли пароль?</p>
                                 <p className="uppercase text-[10px] font-medium font-montserrat w-full text-[#607E96]">не волнуйтесь! такое случается. Пожалуйста, введите адрес электронной почты , связанный с вашей учетной записью.</p>
                                 <div className="w-full flex flex-col gap-2">
+                                    <p className="uppercase font-montserrat text-[12px] font-medium text-[#1B3C4D]">email</p>
                                     <input
                                         name="email"
                                         value={values.email}
@@ -119,9 +166,7 @@ const ForgotPassword = () => {
                             <div className="w-full flex flex-col gap-10">
                                 <button
                                     className="w-full bg-[#1B3C4D] py-5 rounded-2xl"
-                                    onClick={handleSubmit(() => {
-                                        setStep(1);
-                                    })}
+                                    onClick={() => {onSubmit()}}
                                 >
                                     <p className="uppercase font-unbounded font-light text-white">отправить</p>
                                 </button>
@@ -176,10 +221,7 @@ const ForgotPassword = () => {
 
                                 <button
                                     className="w-full bg-[#1B3C4D] py-5 rounded-2xl"
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        handleSubmit(() => setStep(1))(e);
-                                    }}
+                                    onClick={() => {setStep(2)}}
                                 >
                                     <p className="uppercase font-unbounded font-light text-white">отправить</p>
                                 </button>
@@ -192,6 +234,59 @@ const ForgotPassword = () => {
                 </div>
             )}
             {step === 2 && (
+                <div className="w-full min-h-screen flex justify-center items-center">
+                    <div className="sm:w-[400px] w-full sm:p-0 p-5 h-[780px]">
+                        <div className="w-full h-full flex flex-col justify-between gap-10">
+                            <div className="w-full flex flex-col gap-10 relative">
+                                <div className="md:hidden flex flex-row items-center justify-between w-full">
+                                    <img src="/photos/Auth/Back.svg" alt="" className="cursor-pointer w-10" onClick={() => {nav(-1)}}/>
+                                    <img src="/photos/Auth/Star.svg" alt="" className="w-10" />
+                                </div>
+
+                                <img className="md:block hidden absolute -left-20 cursor-pointer" src="/photos/Auth/Back.svg" alt="" onClick={() => {nav(-1)}}/>
+
+                                <p className="font-unbounded text-left md:uppercase font-medium text-[20px]">введите новый пароль</p>
+                                <p className="uppercase text-[10px] font-medium font-montserrat w-full text-[#607E96]">пожалуйста, придумайте сложный пароль</p>
+                                <div className="w-full flex flex-col gap-2">
+                                    <p className="uppercase font-montserrat text-[12px] font-medium text-[#1B3C4D]">пароль</p>
+                                    <input
+                                        name="password"
+                                        type="password"
+                                        value={passwordValues.password}
+                                        onChange={handlePasswordChange}
+                                        className="border-b px-3 py-2 rounded-2xl"
+                                    />
+                                    {passwordErrors.password && <p className="text-red-500 text-xs">{passwordErrors.password}</p>}
+                                </div>
+                                <div className="w-full flex flex-col gap-2">
+                                    <p className="uppercase font-montserrat text-[12px] font-medium text-[#1B3C4D]">подтвердить пароль</p>
+                                    <input
+                                        name="password_confirm"
+                                        type="password"
+                                        value={passwordValues.password_confirm}
+                                        onChange={handlePasswordChange}
+                                        className="border-b px-3 py-2 rounded-2xl"
+                                    />
+                                    {passwordErrors.password_confirm && <p className="text-red-500 text-xs">{passwordErrors.password_confirm}</p>}
+                                </div>
+                            </div>
+                            <div className="w-full flex flex-col gap-10">
+                                <button
+                                    className="w-full bg-[#1B3C4D] py-5 rounded-2xl"
+                                    onClick={handlePasswordSubmit}
+                                    disabled={isPasswordSubmitting}
+                                >
+                                    <p className="uppercase font-unbounded font-light text-white">отправить</p>
+                                </button>
+                                <div className="w-full flex justify-center">
+                                    <img src="/photos/Auth/Register/cross-svgrepo-com.svg" className="w-8 cursor-pointer" alt=""/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+            {step === 3 && (
                 <div className="w-full min-h-screen flex justify-center items-center">
                     <div className="sm:w-[400px] w-full sm:p-0 p-5 h-[780px]">
                         <div className="w-full h-full flex flex-col justify-between gap-10">
