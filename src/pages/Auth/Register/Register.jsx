@@ -1,19 +1,21 @@
 import { useState } from "react";
+import {useNavigate} from "react-router-dom";
 
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [showRepeatPassword, setShowRepeatPassword] = useState(false);
     const [isActive, setIsActive] = useState(false);
+    const nav = useNavigate()
 
     return (
         <div className="w-full min-h-screen flex justify-center items-center">
             <div className="w-[400px] md:h-[780px] h-[800px] sm:p-0 p-5">
                 <div className="w-full flex flex-col gap-10 relative">
                     <div className="md:hidden flex flex-row items-center justify-between w-full">
-                        <img src="/photos/Auth/Back.svg" alt="" className="cursor-pointer"/>
+                        <img src="/photos/Auth/Back.svg" alt="" className="cursor-pointer" onClick={() => {nav(-1)}}/>
                         <img src="/photos/Auth/Star.svg" alt="" />
                     </div>
-                    <img className="md:block hidden absolute -left-20" src="/photos/Auth/Back.svg" alt=""/>
+                    <img className="md:block hidden absolute -left-20 cursor-pointer" src="/photos/Auth/Back.svg" alt="" onClick={() => {nav(-1)}}/>
                     <p className="font-unbounded text-left sm:uppercase font-medium text-[20px]">создать аккаунт</p>
                     <div className="w-full flex flex-col gap-2">
                         {[
@@ -92,7 +94,7 @@ const Register = () => {
                     <button className="w-full bg-[#1B3C4D] py-5 rounded-2xl">
                         <p className="uppercase font-unbounded font-light text-white">зарегистрироваться</p>
                     </button>
-                    <div className="text-center uppercase font-montserrat text-[#8296A6] text-[12px]">уже есть аккаунт? <span className="cursor-pointer text-black">Войти</span> </div>
+                    <div className="text-center uppercase font-montserrat text-[#8296A6] text-[12px]">уже есть аккаунт? <span className="cursor-pointer text-black" onClick={() => {nav("/login")}}>Войти</span> </div>
                     <div className="w-full flex justify-center">
                         <img src="/photos/Auth/Register/cross-svgrepo-com.svg" className="w-8 cursor-pointer" alt=""/>
                     </div>

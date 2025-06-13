@@ -1,9 +1,11 @@
 import React from 'react';
+import {useNavigate} from "react-router-dom";
 
 const TopMain = () => {
 
     const [isBouncing, setIsBouncing] = React.useState(false);
     const [isOpen, setIsOpen] = React.useState(false);
+    const nav = useNavigate();
 
     React.useEffect(() => {
         const interval = setInterval(() => {
@@ -42,7 +44,7 @@ const TopMain = () => {
                     <a className="font-montserrat font-medium text-[16px] text-white whitespace-nowrap cursor-pointer" href='#about'>О сервисе</a>
                     <a className="font-montserrat font-medium text-[16px] text-white whitespace-nowrap cursor-pointer" href='#questions'>Ответы на вопросы</a>
                     <a className="font-montserrat font-medium text-[16px] text-white whitespace-nowrap cursor-pointer" href='#examples'>Примеры результатов</a>
-                    <a className="px-3 py-2 rounded-full !border text-[16px] !border-white font-light uppercase text-white font-unbounded cursor-pointer">войти</a>
+                    <a className="px-3 py-2 rounded-full !border text-[16px] !border-white font-light uppercase text-white font-unbounded cursor-pointer" onClick={() => nav("/login")}>войти</a>
                 </div>
             </div>
             <div className="absolute z-10 lg:top-36 top-[300px] lg:left-[20%] lg:w-[250px] w-full lg:text-left text-center lg:p-0 p-16">

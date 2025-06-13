@@ -1,7 +1,10 @@
 import { useState } from "react";
+import {useNavigate} from "react-router-dom";
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const nav = useNavigate()
+
 
     return (
         <div className="w-full min-h-screen flex justify-center items-center">
@@ -9,11 +12,11 @@ const Login = () => {
                 <div className="w-full h-full flex flex-col justify-between gap-10">
                     <div className="w-full flex flex-col gap-10 relative">
                         <div className="md:hidden flex flex-row items-center justify-between w-full">
-                            <img src="/photos/Auth/Back.svg" alt="" className="cursor-pointer"/>
+                            <img src="/photos/Auth/Back.svg" alt="" className="cursor-pointer" onClick={() => {nav(-1)}}/>
                             <img src="/photos/Auth/Star.svg" alt="" />
                         </div>
 
-                        <img className="md:block hidden absolute -left-20" src="/photos/Auth/Back.svg" alt=""/>
+                        <img className="md:block hidden absolute -left-20 cursor-pointer" src="/photos/Auth/Back.svg" alt="" onClick={() => {nav(-1)}}/>
 
                         <p className="font-unbounded text-left md:uppercase font-medium text-[20px]">войти</p>
                         <div className="w-full flex flex-col gap-2">
@@ -53,14 +56,14 @@ const Login = () => {
                             </div>
                         </div>
                         <div className="w-full flex flex-row justify-end gap-3">
-                            <p className="uppercase font-montserrat text-right font-thin cursor-pointer text-[14px]">забыли пароль?</p>
+                            <p className="uppercase font-montserrat text-right font-thin cursor-pointer text-[14px]" onClick={() => {nav("/forgotpassword")}}>забыли пароль?</p>
                         </div>
                     </div>
                     <div className="w-full flex flex-col gap-10">
                         <button className="w-full bg-[#1B3C4D] py-5 rounded-2xl">
-                            <p className="uppercase font-unbounded font-light text-white">зарегистрироваться</p>
+                            <p className="uppercase font-unbounded font-light text-white">войти</p>
                         </button>
-                        <div className="text-center uppercase font-montserrat text-[#8296A6] text-[12px]">ЕЩЕ НЕТ аккаунтА? <span className="cursor-pointer text-black"> ЗАРЕГИСТРИРОВАТЬСЯ</span> </div>
+                        <div className="text-center uppercase font-montserrat text-[#8296A6] text-[12px]">ЕЩЕ НЕТ аккаунтА? <span className="cursor-pointer text-black" onClick={() => {nav("/register")}}> ЗАРЕГИСТРИРОВАТЬСЯ</span> </div>
                         <div className="w-full flex justify-center">
                             <img src="/photos/Auth/Register/cross-svgrepo-com.svg" className="w-8 cursor-pointer" alt=""/>
                         </div>
