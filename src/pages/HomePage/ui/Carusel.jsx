@@ -69,7 +69,7 @@ const Carusel = () => {
                                 <img
                                     src={src}
                                     alt={`client-${index}`}
-                                    className="rounded-3xl w-full h-[400px] object-cover hover:scale-105 transition duration-200 cursor-pointer"
+                                    className="rounded-3xl w-full h-[400px] object-cover hover:scale-95 transition duration-200 cursor-pointer"
                                     onClick={() => {
                                         setModalOpen(true);
                                         setActiveClientIndex(index);
