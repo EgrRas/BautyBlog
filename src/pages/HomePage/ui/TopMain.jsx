@@ -27,7 +27,7 @@ const TopMain = () => {
                 alt=""
             />
             <img
-                className="lg:hidden absolute md:top-[750px] sm:top-[670px] top-[600px] w-full h-[100px] object-cover"
+                className="lg:hidden absolute md:top-[750px] sm:top-[670px] top-[590px] w-full h-[100px] object-cover"
                 src="/photos/main/BottomBlur.png"
                 alt=""
             />

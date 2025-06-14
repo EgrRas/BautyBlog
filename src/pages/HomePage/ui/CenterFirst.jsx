@@ -22,7 +22,7 @@ const CenterFirst = () => {
                 <p className="lg:text-[30px] text-[23px] lg:text-left text-center font-unbounded font-extrabold text-[#1B3C4D] lg:pt-32 pt-5">
                     Как это работает?
                 </p>
-                <p className="lg:text-[60px] text-[26px] font-unbounded font-light text-[#1B3C4D] uppercase">
+                <p className="lg:text-[60px] text-[26px] font-unbounded font-extralight text-[#1B3C4D] uppercase">
                     Загрузи своё фото, <br/> и наш <br/>
                     AI про<span className="text-[#8296A6]">анализирует </span> твои
                     <span className="text-[#8296A6]"> черты лица </span> и определит типаж
@@ -47,6 +47,15 @@ const CenterFirst = () => {
                     </div>
                     <img style={{ transitionDuration: '2000ms' }} className={`absolute transform lg:max-w-[100%] max-w-[500px] ease-in-out ${isBouncing === true ? "-rotate-10 lg:-top-[180px] top-[200px]" : "-rotate-7 lg:-top-[170px] top-[210px]"}`} src="/photos/main/Soplya2.png" alt="" />
                     <img className="absolute w-80 top-[130px]" src="/photos/main/Mobilka.png" alt="" />
+                    <iframe
+                        width="190"
+                        height="220"
+                        src="https://rutube.ru/play/embed/f4d76c7aebd0ac06307e736cb867db5a"
+                        frameBorder="0"
+                        allow="autoplay"
+                        allowFullScreen
+                        className="absolute top-[235px] z-30 rounded-2xl border-none"
+                    ></iframe>
                     <img className="absolute w-[500px] lg:top-[500px] top-[620px] lg:left-20 -left-20" src="/photos/main/MiddleWoman.png" alt=""/>
                     <div className="absolute left-1/2 transform text-[14px] font-light -translate-x-1/2 top-[850px] w-[240px] h-[50px] flex items-center justify-center rounded-full bg-[#23274B] text-white uppercase cursor-pointer hover:shadow-xl transition duration-200">
                         начать сейчас

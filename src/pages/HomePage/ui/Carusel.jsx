@@ -31,13 +31,13 @@ const Carusel = () => {
                 <p className="lg:hidden text-[23px] text-center font-unbounded font-extrabold text-[#1B3C4D] pb-10">
                     Как это работает?
                 </p>
-                <p className="text-[30px] lg:text-[53px] font-unbounded lg:text-left text-balance font-light uppercase text-[#1B3C4D] leading-tight">
+                <p className="text-[30px] lg:text-[53px] font-unbounded lg:text-left text-balance w-full font-extralight uppercase text-[#1B3C4D] leading-tight">
                     Клиенты, которые уже работают по системе{" "}
-                    <span className="text-[#8296A6] font-medium">MNE IDET</span>
+                    <span className="text-[#8296A6] font-extralight">MNE IDET</span>
                 </p>
 
-                <p className="text-[12px] uppercase pt-10 lg:w-auto w-[70%] lg:text-left text-center">
-                    Нажмите на фото,<br /> чтобы посмотреть кейс
+                <p className="lg:text-[16px] text-[12px] text-[#1B3C4D] font-normal uppercase pt-10 lg:w-auto w-[60%] lg:text-left text-center">
+                    Нажмите на фото,<br className="lg:hidden" /> чтобы посмотреть кейс
                 </p>
 
                 <div className="mt-10 relative pb-24">
@@ -88,13 +88,13 @@ const Carusel = () => {
                 </div>
 
                 <div className="w-full flex justify-center lg:mt-32 mt-10 pb-5">
-                    <div className="w-[240px] h-[50px] text-[14px] font-light flex items-center justify-center rounded-full bg-[#23274B] text-white uppercase cursor-pointer hover:shadow-xl transition duration-200">
+                    <div className="w-[240px] h-[50px] text-[14px] font-light flex items-center justify-center rounded-full bg-[#1B3C4D] text-white uppercase cursor-pointer hover:shadow-xl transition duration-200">
                         узнать свой типаж
                     </div>
                 </div>
             </div>
 
-            {modalOpen && activeClientIndex !== null && activeClientIndex === 0 && (                            //TODO убрать "activeClientIndex === 0" когда еще фоток натаскаете!!!
+            {modalOpen && activeClientIndex !== null && (
                 <div className="fixed inset-0 z-50 bg-black bg-opacity-80 flex items-center justify-center">
                     <div className="relative w-full h-full flex items-center justify-center">
                         <Swiper
