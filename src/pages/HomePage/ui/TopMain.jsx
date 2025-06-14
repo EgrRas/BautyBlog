@@ -75,11 +75,13 @@ const TopMain = () => {
                         <a className="font-montserrat font-medium text-[16px] text-white whitespace-nowrap cursor-pointer"  href='#questions'>Ответы на вопросы</a>
                         <a className="font-montserrat font-medium text-[16px] text-white whitespace-nowrap cursor-pointer" href='#examples' >Результаты</a>
                     </div>
-                    <div className="flex w-full flex-col gap-3 items-center justify-center sm:mt-[7%] mt-[20%]">
+                    <div
+                        onClick={() => nav("/login")}
+                        className="flex w-full flex-col gap-3 items-center justify-center sm:mt-[7%] mt-[20%]">
                         <div className="w-16 h-16 border rounded-full border-white flex items-center justify-center">
                             <img src="/photos/main/Profile.svg" className="w-8 cursor-pointer" alt=""/>
                         </div>
-                        <p className="text-center font-montserrat font-light text-[20px] text-white cursor-pointer">Войти</p>
+                        <p className="text-center font-montserrat font-light text-[20px] text-white cursor-pointer" >Войти</p>
                     </div>
                 </div>
             </div>
