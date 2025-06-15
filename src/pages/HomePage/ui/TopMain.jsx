@@ -85,7 +85,7 @@ const TopMain = () => {
                         <a className="font-montserrat font-normal text-[16px] text-white whitespace-nowrap cursor-pointer" href='#why-main'>Преимущества</a>
                         <a className="font-montserrat font-normal text-[16px] text-white whitespace-nowrap cursor-pointer" href='#about'>О сервисе</a>
                         <a className="font-montserrat font-normal text-[16px] text-white whitespace-nowrap cursor-pointer"  href='#questions'>Ответы на вопросы</a>
-                        <a className="font-montserrat font-normal text-[16px] text-white whitespace-nowrap cursor-pointer" href='#examples' >Результаты</a>
+                        <a className="font-montserrat font-normal text-[16px] text-white whitespace-nowrap cursor-pointer" href='#examples'>Результаты</a>
                     </div>
                     <div
                         className="flex w-full flex-col gap-3 items-center justify-center">
