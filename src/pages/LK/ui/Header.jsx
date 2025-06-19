@@ -7,7 +7,7 @@ const Header = () => {
     const [isOpen, setIsOpen] = React.useState(false);
     const nav = useNavigate();
 
-    const [step, setStep] = React.useState(0);
+    const [step, setStep] = React.useState(0); //0 1 2 - функциональные, 3 - загрузка
 
     React.useEffect(() => {
         const interval = setInterval(() => {
@@ -31,14 +31,24 @@ const Header = () => {
 
     return (
         <div className={`w-full lg:h-auto min-h-screen relative`}>
-            <img src="/photos/LK/WomanLK.png" alt="" className="absolute lg:hidden top-0 left-0 min-h-screen object-cover" />
-            <div className={`w-full h-screen absolute ${step === 0 ? "bg-[#ffffff] lg:bg-[#C2CED8] lg:opacity-100 opacity-70" : "bg-[#C2CED8]"}`} />
+            <img src="/photos/LK/WomanLK.png" alt="" className={`absolute lg:hidden top-0 left-0 min-h-screen ${step === 3 ? "object-cover scale-150" : "object-cover"}`} />
+            <div className={`w-full h-screen absolute ${
+                step === 0
+                    ? "bg-[#ffffff] lg:bg-[#C2CED8] lg:opacity-100 opacity-70"
+                    : step === 3
+                        ? "lg:bg-[#C2CED8]"
+                        : "bg-[#C2CED8]"
+            }`} />
 
-            <img src="/photos/LK/Shadow.png" alt="" className={`absolute top-0 left-0 lg:hidden ${step === 0 ? "hidden" : ""}`} />
+            <img src="/photos/LK/Shadow.png" alt="" className={`absolute top-0 left-0 lg:hidden ${step === 0 || step === 3 ? "hidden" : ""}`} />
 
             <img src="/photos/LK/BottomBlurLK.png" alt="" className="absolute -bottom-28 left-1/2 -translate-x-1/2  w-full lg:hidden"/>
 
-            <div className={`lg:backdrop-blur-none backdrop-blur-sm z-30 w-full lg:h-[100px] h-[60px] absolute top-0 left-0 flex flex-row items-center justify-between lg:px-20 px-5 ${step === 0 ? "bg-gradient-to-t lg:to-[#00000040] to-[#00000030] from-[#C2CED8] " : "lg:bg-gradient-to-t to-[#00000060] from-[#C2CED8]"}}`}>
+            <div className={`lg:backdrop-blur-none backdrop-blur-sm z-30 w-full lg:h-[100px] h-[60px] absolute top-0 left-0 flex flex-row items-center justify-between lg:px-20 px-5 ${
+                step === 0
+                    ? "bg-gradient-to-t lg:to-[#00000040] to-[#00000030] from-[#C2CED8]"
+                    : "bg-gradient-to-t lg:to-[#00000060] to-[#00000060] from-[#C2CED8]"
+            }`}>
                 <img src="/photos/main/Profile.svg" className="h-[20px] lg:hidden block cursor-pointer" alt="" />
                 <img className="w-[110px]" src="/photos/main/MNEIDET.svg" alt="" />
                 <img src="/photos/main/Burger.svg" className="h-[20px] lg:hidden block cursor-pointer" alt="" onClick={() => setIsOpen(!isOpen)}/>
@@ -97,7 +107,7 @@ const Header = () => {
                         </p>
                         <img src="/photos/main/MiddleWoman.png" className="lg:block hidden w-[65%]" alt=""/>
                     </div>
-                    <div className="uppercase font-light text-center text-[13px] lg:hidden block">
+                    <div className="uppercase font-light text-center text-[13px] lg:hidden block font-montserrat">
                         Здесь может быть размещен
                         какой-то текст
                     </div>
@@ -126,6 +136,21 @@ const Header = () => {
                         Здесь может быть размещен
                         какой-то текст
                     </div>
+                </div>
+            )}
+
+
+            {step === 3 && (
+                <div className="absolute lg:top-[40%] top-[55%] left-1/2 -translate-x-1/2 -translate-y-1/2 lg:h-[40%] h-[70%] lg:block flex flex-col items-center justify-between text-[#1B3C4D]">
+                    <div className="flex flex-col items-center justify-start h-full gap-4">
+                        <p className="text-center lg:text-[#1B3C4D] text-white font-light font-montserrat uppercase ">еще пару мгновений, <br />
+                            происходит магия...
+                        </p>
+                        <img src="/photos/LK/Krutilcka.svg" className="lg:mt-10" alt=""/>
+
+                    </div>
+                    <img src="/photos/main/MiddleWoman.png" className="lg:block hidden w-[65%] mx-auto" alt=""/>
+
                 </div>
             )}
 

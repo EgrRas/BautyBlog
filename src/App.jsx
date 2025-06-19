@@ -17,6 +17,7 @@ import {Route, Routes} from "react-router-dom";
 import './styles/global.css'
 
 import LK from "./pages/LK/LK.jsx"
+import WhereMoney from "./pages/LK/WhereMoney.jsx";
 
 function App() {
     const handleNavigation = useNavigationHandler();
@@ -36,7 +37,8 @@ function App() {
                 <Route path="/verify_email" element={<VerifyEmailPage />} />
                 <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
                 <Route path="/password_reset" element={<PasswordResetPage />} />
-                <Route path="/lkstart" element={<LK />} />
+                <Route path="/lk" element={<LK />} />
+                <Route path="/payment" element={<WhereMoney />} />
 
                 {/* Защищенные маршруты */}
                 <Route element={<ProtectedRoute />}>
