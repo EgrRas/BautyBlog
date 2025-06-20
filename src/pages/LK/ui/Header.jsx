@@ -77,7 +77,7 @@ const Header = () => {
                         </div>
 
                         <p className="text-center font-montserrat font-light text-[12px] uppercase">
-                            наш AI проанализирует черты лица <br className="lg:block hidden"/>
+                            наш <span className="">AI</span> проанализирует черты лица <br className="lg:block hidden"/>
                             и определит типаж
                         </p>
                         <img src="/photos/main/MiddleWoman.png" className="lg:block hidden w-[65%]" alt=""/>
