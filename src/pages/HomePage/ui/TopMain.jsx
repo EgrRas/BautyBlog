@@ -66,11 +66,13 @@ const TopMain = () => {
                     Наш искусственный интеллект анализирует черты лица и определяет типаж по системе
                     <span className="block font-semibold">MNE IDET</span>
                 </p>
-                <div className="lg:hidden mx-auto mt-24 md:mt-10 top-[85%] w-[240px] h-[50px] flex items-center justify-center rounded-full bg-[#23274B] text-white uppercase text-[14px] font-light cursor-pointer hover:shadow-xl transition duration-200">
+                <div className="lg:hidden mx-auto mt-24 md:mt-10 top-[85%] w-[240px] h-[50px] flex items-center justify-center rounded-full bg-[#23274B] text-white uppercase text-[14px] font-light cursor-pointer hover:shadow-xl transition duration-200" onClick={() => nav("/LK")}>
                     Узнай свой типаж
                 </div>
             </div>
-            <div className="absolute left-1/2 transform -translate-x-1/2 top-[85%] w-[240px] h-[50px] lg:flex hidden items-center justify-center rounded-full bg-[#23274B] text-white uppercase text-[12px] font-light cursor-pointer hover:shadow-xl transition duration-200 font-unbounded z-50">
+            <div className="absolute left-1/2 transform -translate-x-1/2 top-[85%] w-[240px] h-[50px] lg:flex hidden items-center justify-center rounded-full bg-[#23274B] text-white uppercase text-[12px] font-light cursor-pointer hover:shadow-xl transition duration-200 font-unbounded z-50"
+                 onClick={() => nav("/LK")}
+            >
                 Узнай свой типаж
             </div>
             <img style={{ transitionDuration: '2000ms' }} className={`absolute h-[750px] w-auto z-20 transform ease-in-out lg:left-0 md:-left-[50%] -left-[40%] ${isBouncing ? "lg:top-[10%] -top-[20%]" : "lg:top-[5%] -top-[25%]" }`} src="/photos/main/Soplya.png" alt=""/>

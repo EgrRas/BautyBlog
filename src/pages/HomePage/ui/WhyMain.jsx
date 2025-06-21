@@ -1,7 +1,12 @@
 import React from 'react';
 import SectionWrapper from "../../../hoc/SectionWrapper.jsx";
+import {useNavigate} from "react-router-dom";
 
 const WhyMain = () => {
+
+    const nav = useNavigate()
+
+
     return (
         <div className="w-full flex justify-center">
             <div className="lg:w-[1000px] w-full p-5 flex flex-col gap-5">
@@ -28,7 +33,9 @@ const WhyMain = () => {
                     </div>
                 </div>
                 <div className="w-full flex justify-center lg:mt-40 mt-16">
-                    <div className="w-[240px] h-[50px] text-[14px] font-light flex items-center justify-center rounded-full bg-[#23274B] text-white uppercase cursor-pointer hover:shadow-xl transition duration-200">
+                    <div className="w-[240px] h-[50px] text-[14px] font-light flex items-center justify-center rounded-full bg-[#23274B] text-white uppercase cursor-pointer hover:shadow-xl transition duration-200"
+                         onClick={() => nav("/LK")}
+                    >
                         узнать свой типаж
                     </div>
                 </div>

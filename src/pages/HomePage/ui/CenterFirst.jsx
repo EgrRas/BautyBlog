@@ -1,9 +1,11 @@
 import React from 'react';
 import SectionWrapper from "../../../hoc/SectionWrapper.jsx";
+import {useNavigate} from "react-router-dom";
 
 const CenterFirst = () => {
 
     const [isBouncing, setIsBouncing] = React.useState(false);
+    const nav = useNavigate()
 
     React.useEffect(() => {
         const interval = setInterval(() => {
@@ -57,7 +59,9 @@ const CenterFirst = () => {
                         className="absolute top-[235px] z-30 rounded-2xl border-none"
                     ></iframe>
                     <img className="absolute w-[500px] lg:top-[500px] top-[620px] lg:left-20 -left-20" src="/photos/main/MiddleWoman.png" alt=""/>
-                    <div className="absolute left-1/2 transform text-[14px] font-light -translate-x-1/2 top-[850px] w-[240px] h-[50px] flex items-center justify-center rounded-full bg-[#23274B] text-white uppercase cursor-pointer hover:shadow-xl transition duration-200">
+                    <div className="absolute left-1/2 transform text-[14px] font-light -translate-x-1/2 top-[850px] w-[240px] h-[50px] flex items-center justify-center rounded-full bg-[#23274B] text-white uppercase cursor-pointer hover:shadow-xl transition duration-200"
+                         onClick={() => nav("/LK")}
+                    >
                         начать сейчас
                     </div>
                 </div>
