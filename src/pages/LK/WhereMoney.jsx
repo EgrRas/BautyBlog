@@ -17,6 +17,34 @@ const WhereMoney = () => {
 
             {step === 0 && (
                 <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="flex flex-col items-center justify-end lg:gap-6 gap-3 text-[#1B3C4D] lg:h-[75%] h-[60%] max-w-md px-6 w-full">
+
+                        <button className="w-full bg-[#1B3C4D] py-5 rounded-2xl" onClick={() => setStep(1)}>
+                            <p className="uppercase font-unbounded font-light text-[14px] text-white">
+                                Войти
+                            </p>
+                        </button>
+                        <button className="w-full py-5 rounded-2xl border border-[#1B3C4D] " onClick={() => setStep(1)}>
+                            <p className="uppercase font-unbounded font-light text-[14px] text-[#1B3C4D]">
+                                Зарегестрироваться
+                            </p>
+                        </button>
+                        <div className="w-full hidden lg:flex justify-center mt-7">
+                            <img
+                                src="/photos/Auth/Register/cross-svgrepo-com.svg"
+                                className="w-8 cursor-pointer"
+                                alt=""
+                                onClick={() => {
+                                    nav("/");
+                                }}
+                            />
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {step === 1 && (
+                <div className="absolute inset-0 flex items-center justify-center">
                     <div className="flex flex-col items-center justify-between lg:gap-6 gap-3 text-[#1B3C4D] lg:h-[75%] h-[60%] max-w-md px-6 w-full">
                         <p className="text-[25px] font-unbounded lg:font-medium font-thin lg:text-left text-center uppercase w-full">
                             оплатите доступ <br /> к сервису
