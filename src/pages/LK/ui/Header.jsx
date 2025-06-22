@@ -7,7 +7,7 @@ const Header = () => {
     const [isBouncing, setIsBouncing] = React.useState(false);
     const [isOpen, setIsOpen] = React.useState(false);
     const nav = useNavigate();
-    const { isAuthenticated } = useAuth(); // Получаем статус авторизации
+    const { isAuthenticated } = useAuth();
 
     const [step, setStep] = React.useState(0); // 0 1 2 - функциональные, 3 - загрузка
     const [photoFile, setPhotoFile] = React.useState(null);
@@ -18,10 +18,10 @@ const Header = () => {
 
     React.useEffect(() => {
         const checkAuthAndPayment = async () => {
-            if (!isAuthenticated) {
-                nav('/payment');
-                return;
-            }
+            // if (!isAuthenticated) {
+            //     nav('/payment');
+            //     return;
+            // }
 
             try {
                 setPaymentStatus('checking');
@@ -42,13 +42,13 @@ const Header = () => {
                     }
                 } else {
                     setPaymentStatus('unpaid');
-                    nav('/payment');
+                    // nav('/payment');
                 }
             } catch (error) {
                 console.error('Ошибка проверки платежа:', error);
                 setError('Не удалось проверить статус платежа');
                 setPaymentStatus('unpaid');
-                nav('/payment');
+                // nav('/payment');
             }
         };
 
@@ -76,10 +76,10 @@ const Header = () => {
     }, [isOpen]);
 
     const handlePhotoUpload = async (file) => {
-        if (!isAuthenticated || paymentStatus !== 'paid') {
-            nav('/payment');
-            return;
-        }
+        // if (!isAuthenticated || paymentStatus !== 'paid') {
+        //     nav('/payment');
+        //     return;
+        // }
 
         if (!file) return;
         setStep(3);
@@ -115,9 +115,9 @@ const Header = () => {
 
     // Если не авторизован или не оплачено, этот код не выполнится из-за redirect
     // Но на случай если redirect не сработал, добавим проверку
-    if (!isAuthenticated || paymentStatus !== 'paid') {
-        return null; // или можно вернуть сообщение о необходимости авторизации/оплаты
-    }
+    // if (!isAuthenticated || paymentStatus !== 'paid') {
+    //     return null;
+    // }
 
     return (
         <div className={`w-full lg:h-auto min-h-screen relative`}>
@@ -142,10 +142,10 @@ const Header = () => {
                 <img className="w-[110px]" src="/photos/main/MNEIDET.svg" alt="" />
                 <img src="/photos/main/Burger.svg" className="h-[20px] lg:hidden block cursor-pointer" alt="" onClick={() => setIsOpen(!isOpen)} />
                 <div className="lg:flex flex-row xl:gap-[45px] gap-[25px] items-center justify-end hidden">
-                    <a className="font-montserrat font-medium text-[12px] text-white whitespace-nowrap cursor-pointer" href='#why-main'>Преимущества</a>
-                    <a className="font-montserrat font-medium text-[12px] text-white whitespace-nowrap cursor-pointer" href='#about'>О сервисе</a>
-                    <a className="font-montserrat font-medium text-[12px] text-white whitespace-nowrap cursor-pointer" href='#questions'>Ответы на вопросы</a>
-                    <a className="font-montserrat font-medium text-[12px] text-white whitespace-nowrap cursor-pointer" href='#examples'>Примеры результатов</a>
+                    <a className="font-montserrat font-medium text-[12px] text-white whitespace-nowrap cursor-pointer" href='/#why-main'>Преимущества</a>
+                    <a className="font-montserrat font-medium text-[12px] text-white whitespace-nowrap cursor-pointer" href='/#about'>О сервисе</a>
+                    <a className="font-montserrat font-medium text-[12px] text-white whitespace-nowrap cursor-pointer" href='/#questions'>Ответы на вопросы</a>
+                    <a className="font-montserrat font-medium text-[12px] text-white whitespace-nowrap cursor-pointer" href='/#examples'>Примеры результатов</a>
                     <a className="px-7 h-12 flex items-center justify-center rounded-full !border text-[11px] !border-white font-light uppercase text-white font-unbounded cursor-pointer" onClick={() => nav("/login")}>войти</a>
                 </div>
             </div>
@@ -258,10 +258,10 @@ const Header = () => {
                 </div>
                 <div className="w-full flex flex-col items-center justify-center h-full gap-14">
                     <div className="flex flex-col gap-5 text-center">
-                        <a className="font-montserrat font-normal text-[16px] text-white whitespace-nowrap cursor-pointer" href=''>Преимущества</a>
-                        <a className="font-montserrat font-normal text-[16px] text-white whitespace-nowrap cursor-pointer" href=''>О сервисе</a>
-                        <a className="font-montserrat font-normal text-[16px] text-white whitespace-nowrap cursor-pointer" href=''>Ответы на вопросы</a>
-                        <a className="font-montserrat font-normal text-[16px] text-white whitespace-nowrap cursor-pointer" href=''>Результаты</a>
+                        <a className="font-montserrat font-normal text-[16px] text-white whitespace-nowrap cursor-pointer" href='/#why-main'>Преимущества</a>
+                        <a className="font-montserrat font-normal text-[16px] text-white whitespace-nowrap cursor-pointer" href='/#about'>О сервисе</a>
+                        <a className="font-montserrat font-normal text-[16px] text-white whitespace-nowrap cursor-pointer" href='/#questions'>Ответы на вопросы</a>
+                        <a className="font-montserrat font-normal text-[16px] text-white whitespace-nowrap cursor-pointer" href='/#examples'>Результаты</a>
                     </div>
                     <div className="flex w-full flex-col gap-3 items-center justify-center">
                         <div className="w-12 h-12 border rounded-full border-white flex items-center justify-center cursor-pointer" onClick={() => nav("/login")}> <img src="/photos/main/Profile.svg" className="w-6" alt="" /> </div>
