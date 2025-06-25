@@ -46,7 +46,8 @@ $authHost.interceptors.response.use(
                 console.error("Ошибка обновления токена:", refreshError);
                 localStorage.removeItem("access_token");
                 localStorage.removeItem("refresh_token");
-                window.location.href = "/login"; // или dispatch(logout())
+                // window.location.href = "/login";
+
                 return Promise.reject(refreshError);
             }
         }

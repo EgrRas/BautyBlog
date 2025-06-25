@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { $host } from "../../../app/indexAPI.js";
-import { useAppDispatch } from "../../../shared/hooks/redux.js";
 import { login } from "../../../features/Auth/model/slice.js";
-import {LK} from "../../../app/routes/constans.js";
+import {useDispatch} from "react-redux";
 
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -20,7 +19,7 @@ const Register = () => {
         password_confirm: ''
     });
 
-    const dispatch = useAppDispatch();
+    const dispatch = useDispatch();
     const nav = useNavigate();
 
     const handleChange = (e) => {
@@ -64,7 +63,7 @@ const Register = () => {
             const userData = await fetchRegister(values);
 
             dispatch(login({ user: userData }));
-            nav(LK);
+            nav();
         } catch (error) {
             console.error("Ошибка регистрации:", error);
             if (error?.response?.data?.message) {

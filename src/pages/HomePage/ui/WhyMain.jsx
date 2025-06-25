@@ -34,7 +34,7 @@ const WhyMain = () => {
                 </div>
                 <div className="w-full flex justify-center lg:mt-40 mt-16">
                     <div className="w-[240px] h-[50px] text-[14px] font-light flex items-center justify-center rounded-full bg-[#1B3C4D] text-white uppercase cursor-pointer hover:shadow-xl transition duration-200"
-                         onClick={() => nav("/LK")}
+                         onClick={() => nav("/Lk")}
                     >
                         узнать свой типаж
                     </div>

@@ -2,15 +2,15 @@ import {useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import {$host} from "../../../app/indexAPI.js";
 import {LK} from "../../../app/routes/constans.js";
-import {useAppDispatch} from "../../../shared/hooks/redux.js";
 import { login } from "../../../features/Auth/model/slice.js";
+import {useDispatch} from "react-redux";
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [values, setValues] = useState({ email: '', password: '' });
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const dispatch = useAppDispatch();
+    const dispatch = useDispatch();
     const [isModalErrorOpen, setIsModalErrorOpen] = useState(false);
 
     const nav = useNavigate();
@@ -58,7 +58,7 @@ const Login = () => {
         try {
             const data = await fetchLogin(values);
 
-            dispatch(login({ user: data.user }));
+            dispatch(login(data));
 
             nav(LK);
         } catch (error) {

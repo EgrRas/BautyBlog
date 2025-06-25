@@ -60,7 +60,7 @@ const CenterFirst = () => {
                     ></iframe>
                     <img className="absolute w-[500px] lg:top-[500px] top-[660px] lg:left-20 -left-20" src="/photos/main/MiddleWoman.png" alt=""/>
                     <div className="absolute left-1/2 lg:flex hidden transform text-[14px] font-light -translate-x-1/2 top-[850px] w-[240px] h-[50px] items-center justify-center rounded-full bg-[#23274B] text-white uppercase cursor-pointer hover:shadow-xl transition duration-200"
-                         onClick={() => nav("/LK")}
+                         onClick={() => nav("/Lk")}
                     >
                         начать сейчас
                     </div>
