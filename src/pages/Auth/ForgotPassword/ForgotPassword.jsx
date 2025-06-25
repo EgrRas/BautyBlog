@@ -117,9 +117,9 @@ const ForgotPassword = () => {
         try {
             setPwdLoading(true);
             await $host.post("/auth/password/reset", {
-                password:       pwd.password,
-                password_confirm: pwd.password_confirm,
-                reset_token:    resetToken,
+                password:pwd.password,
+                password_confirm:pwd.password_confirm,
+                reset_token:resetToken,
             });
             setStep(3);
         } catch (e) {
@@ -135,9 +135,9 @@ const ForgotPassword = () => {
         <div>
             {step === 0 && (
                 <form
-                    onSubmit={(e) => {
+                    onSubmit={async (e) => {
                         e.preventDefault();
-                        sendMail();
+                        await sendMail();
                     }}
                     className="w-full min-h-screen flex justify-center items-center"
                 >
