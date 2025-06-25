@@ -1,13 +1,11 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
-import api from '../../../utils/api';
-import { useAuth } from '../../../contexts/AuthContext';
 
 const Header = () => {
     const [isBouncing, setIsBouncing] = React.useState(false);
     const [isOpen, setIsOpen] = React.useState(false);
     const nav = useNavigate();
-    const { isAuthenticated } = useAuth();
+    const { isAuthenticated } = true
 
     const [step, setStep] = React.useState(0); // 0 1 2 - функциональные, 3 - загрузка
     const [photoFile, setPhotoFile] = React.useState(null);
@@ -15,45 +13,6 @@ const Header = () => {
     const [error, setError] = React.useState('');
     const [paymentStatus, setPaymentStatus] = React.useState(null);
 
-
-    React.useEffect(() => {
-        const checkAuthAndPayment = async () => {
-            // if (!isAuthenticated) {
-            //     nav('/payment');
-            //     return;
-            // }
-
-            try {
-                setPaymentStatus('checking');
-                // Проверяем статус платежа
-                const paymentResponse = await api.get('/api/v1/payment/info');
-
-                if (paymentResponse.data.payment_status === 'paid') {
-                    setPaymentStatus('paid');
-                    // Проверяем наличие стиля
-                    try {
-                        const styleResponse = await api.get('/api/v1/style/info');
-                        setStyleId(styleResponse.data.style_id);
-                        setStep(1);
-                    } catch (styleError) {
-                        if (styleError.response?.status === 404) {
-                            setStep(0);
-                        }
-                    }
-                } else {
-                    setPaymentStatus('unpaid');
-                    // nav('/payment');
-                }
-            } catch (error) {
-                console.error('Ошибка проверки платежа:', error);
-                setError('Не удалось проверить статус платежа');
-                setPaymentStatus('unpaid');
-                // nav('/payment');
-            }
-        };
-
-        checkAuthAndPayment();
-    }, [isAuthenticated, nav]);
 
     React.useEffect(() => {
         const interval = setInterval(() => {
@@ -87,37 +46,10 @@ const Header = () => {
         const formData = new FormData();
         formData.append('photo', file);
 
-        try {
-            const response = await api.post('/api/v1/style/build', formData, {
-                headers: { 'Content-Type': 'multipart/form-data' }
-            });
 
-            setStyleId(response.data.style_id);
-            setStep(1);
-        } catch (err) {
-            console.error('Ошибка загрузки:', err);
-            setError('Ошибка при загрузке фото');
-            setStep(0);
-        }
+        //ЗАПРОС????
     };
 
-    // Если проверка платежа еще не завершена, показываем загрузку
-    if (paymentStatus === 'checking') {
-        return (
-            <div className="w-full h-screen flex items-center justify-center bg-[#C2CED8]">
-                <div className="text-center">
-                    <p className="text-[#1B3C4D] font-montserrat">Проверка статуса...</p>
-                    {/* Можно добавить спиннер загрузки */}
-                </div>
-            </div>
-        );
-    }
-
-    // Если не авторизован или не оплачено, этот код не выполнится из-за redirect
-    // Но на случай если redirect не сработал, добавим проверку
-    // if (!isAuthenticated || paymentStatus !== 'paid') {
-    //     return null;
-    // }
 
     return (
         <div className={`w-full lg:h-auto min-h-screen relative`}>

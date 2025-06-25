@@ -71,7 +71,7 @@ const TopMain = () => {
                 </div>
             </div>
             <div className="absolute left-1/2 transform -translate-x-1/2 top-[85%] w-[240px] h-[50px] lg:flex hidden items-center justify-center rounded-full bg-[#1B3C4D] text-white uppercase text-[12px] font-light cursor-pointer hover:shadow-xl transition duration-200 font-unbounded z-50"
-                 onClick={() => nav("/LK")}
+                 onClick={() => nav("/lk")}
             >
                 Узнай свой типаж
             </div>

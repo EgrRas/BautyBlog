@@ -22,8 +22,8 @@ const Footer = () => {
                         <a className="font-montserrat  text-[16px] font-light cursor-pointer lg:text-left text-center" href='#examples'>Результаты</a>
                     </div>
                     <div className="flex flex-row items-center lg:justify-end justify-center gap-5">
-                        <img src="/photos/main/TG.png" alt="" />
-                        <img src="/photos/main/YT.png" alt="" />
+                        <img src="/photos/main/TG.svg" alt="" />
+                        <img src="/photos/main/YT.svg" alt="" />
                     </div>
                 </div>
             </div>
