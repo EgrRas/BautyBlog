@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { $host } from "../../../app/indexAPI.js";
-import { login } from "../../../features/Auth/model/slice.js";
 import {useDispatch} from "react-redux";
 import {VERIFY} from "../../../app/routes/constans.js";
 
@@ -20,7 +19,6 @@ const Register = () => {
         password_confirm: ''
     });
 
-    const dispatch = useDispatch();
     const nav = useNavigate();
 
     const handleChange = (e) => {
