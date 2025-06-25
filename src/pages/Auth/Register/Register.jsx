@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { $host } from "../../../app/indexAPI.js";
 import { login } from "../../../features/Auth/model/slice.js";
 import {useDispatch} from "react-redux";
+import {VERIFY} from "../../../app/routes/constans.js";
 
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -60,10 +61,9 @@ const Register = () => {
         setIsSubmitting(true);
 
         try {
-            const userData = await fetchRegister(values);
-
-            dispatch(login({ user: userData }));
-            nav();
+            const {data} = await fetchRegister(values);
+            localStorage.setItem('userId' , String(data.user_id))
+            nav(VERIFY);
         } catch (error) {
             console.error("Ошибка регистрации:", error);
             if (error?.response?.data?.message) {
