@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { $host } from "../../../app/indexAPI.js";          // axios instance
+import { $host } from "../../../app/indexAPI.js";
 
 const ForgotPassword = () => {
     const nav = useNavigate();
@@ -19,7 +19,7 @@ const ForgotPassword = () => {
     const [isSendingMail, setIsSendingMail] = useState(false);
 
     /* ───────────   step 1 ─────────── */
-    const [code, setCode] = useState(["", "", "", ""]);
+    const [code, setCode] = useState(["", "", "", "", "", ""]);
     const inputRefs = useRef([]);
     const [timer, setTimer] = useState(40);
     const timerRef = useRef(null);
@@ -84,7 +84,7 @@ const ForgotPassword = () => {
         const next = [...code];
         next[idx] = val;
         setCode(next);
-        if (val && idx < 3) inputRefs.current[idx + 1]?.focus();
+        if (val && idx < 5) inputRefs.current[idx + 1]?.focus();
     };
     const handleKey = (e, idx) => {
         if (e.key === "Backspace" && !code[idx] && idx > 0)

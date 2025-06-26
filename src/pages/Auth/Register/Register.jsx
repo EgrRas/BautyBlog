@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { $host } from "../../../app/indexAPI.js";
-import {useDispatch} from "react-redux";
 import {VERIFY} from "../../../app/routes/constans.js";
 
 const Register = () => {
