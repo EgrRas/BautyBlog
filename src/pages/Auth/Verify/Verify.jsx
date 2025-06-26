@@ -11,10 +11,7 @@ const Verify = () => {
     const nav = useNavigate()
     const [timer, setTimer] = useState(40);
     const timerRef = useRef(null);
-    const [code, setCode] = useState(["", "", "", "", "", ""]);
-    const [resetToken, setResetToken] = useState("");
     const userId = localStorage.getItem("userId");
-    const inputRefs = useRef([]);
 
 
     const startTimer = (sec = 40) => {
@@ -36,31 +33,78 @@ const Verify = () => {
         return () => clearInterval(timerRef.current);
     }, [step]);
 
-    //step 1
-    const handleCodeChange = (val, idx) => {
-        if (!/^\d?$/.test(val)) return;
-        const next = [...code];
-        next[idx] = val;
-        setCode(next);
-        if (val && idx < 5) inputRefs.current[idx + 1]?.focus();
+    const CODE_LENGTH = 6;
+    const [code, setCode] = useState(Array(CODE_LENGTH).fill(""));
+    const inputRefs = useRef([]);
+
+    const handleCodeChange = (e, idx) => {
+        const raw = e.target.value.replace(/\D/g, ""); // Оставляем только цифры
+        if (!raw) {
+            updateDigit("", idx);
+            return;
+        }
+
+        const chars = raw.split("");
+        let i = idx;
+
+        chars.forEach((char) => {
+            if (i < CODE_LENGTH) {
+                updateDigit(char, i);
+                i++;
+            }
+        });
+
+        if (i < CODE_LENGTH) {
+            inputRefs.current[i]?.focus();
+        } else {
+            inputRefs.current[CODE_LENGTH - 1]?.blur();
+        }
     };
-    const handleKey = (e, idx) => {
-        if (e.key === "Backspace" && !code[idx] && idx > 0)
+
+    const handleKeyDown = (e, idx) => {
+        if (e.key === "Backspace") {
+            if (code[idx]) {
+                updateDigit("", idx);
+            } else if (idx > 0) {
+                updateDigit("", idx - 1);
+                inputRefs.current[idx - 1]?.focus();
+            }
+            e.preventDefault();
+        }
+
+        if (e.key === "ArrowLeft" && idx > 0) {
             inputRefs.current[idx - 1]?.focus();
+            e.preventDefault();
+        }
+
+        if (e.key === "ArrowRight" && idx < CODE_LENGTH - 1) {
+            inputRefs.current[idx + 1]?.focus();
+            e.preventDefault();
+        }
+    };
+
+    const updateDigit = (digit, idx) => {
+        setCode((prev) => {
+            const copy = [...prev];
+            copy[idx] = digit;
+            return copy;
+        });
     };
 
     const sendCode = async () => {
         const token = code.join("");
-        if (token.length !== 6) return alert("Введите 6-значный код");
-        setResetToken(token);
+        if (token.length !== CODE_LENGTH) {
+            return alert("Введите 6-значный код");
+        }
+
         try {
             await $host.post("/auth/email/verify", {
                 user_id: userId,
-                reset_token:    resetToken
+                reset_token: token, // используем собранный код
             });
             setStep(3);
         } catch (e) {
-            alert(e.response?.data?.message ?? "Ошибка верфикации");
+            alert(e.response?.data?.message ?? "Ошибка верификации");
         }
     };
 
@@ -91,8 +135,8 @@ const Verify = () => {
                                             inputMode="numeric"
                                             maxLength={1}
                                             value={digit}
-                                            onChange={(e) => handleCodeChange(e.target.value, index)}
-                                            onKeyDown={(e) => handleKey(e, index)}
+                                            onChange={(e) => handleCodeChange(e, index)}
+                                            onKeyDown={(e) => handleKeyDown(e, index)}
                                             className="w-full aspect-square text-center text-2xl font-bold rounded-2xl border border-gray-300 focus:border-black outline-none transition-all"
                                         />
                                     ))}
