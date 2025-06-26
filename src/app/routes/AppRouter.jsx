@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {selectIsAuthenticated} from "../../features/Auth/model/selector.js";
 import { logout, setIsAuthenticated} from "../../features/Auth/model/slice.js";
 import {getUsersStyle} from "../../pages/Lk/api/lkAPI.js";
+import Loading from "../../pages/Helpers/Loading.jsx";
 
 const AppRouter = () => {
     const location = useLocation();
@@ -48,10 +49,10 @@ const AppRouter = () => {
         return isAuth ? children : <Navigate to={MAIN} replace />;
     };
 
-    if (loading) return <>Загрузка…</>;
+    if (loading) return <Loading />;
 
     return (
-        <Suspense fallback={<>Загрузка…</>}>
+        <Suspense fallback={<Loading />}>
             <Routes>
                 {authorise.map(({ path, Component }) => (
                     <Route

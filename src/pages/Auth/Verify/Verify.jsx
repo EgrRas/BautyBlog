@@ -12,6 +12,7 @@ const Verify = () => {
     const [timer, setTimer] = useState(40);
     const timerRef = useRef(null);
     const userId = localStorage.getItem("userId");
+    const [resetToken, setResetToken] = React.useState("");
 
 
     const startTimer = (sec = 40) => {
@@ -93,18 +94,16 @@ const Verify = () => {
 
     const sendCode = async () => {
         const token = code.join("");
-        if (token.length !== CODE_LENGTH) {
-            return alert("Введите 6-значный код");
-        }
-
+        if (token.length !== 6) return alert("Введите 6-значный код");
+        setResetToken(token);
         try {
-            await $host.post("/auth/email/verify", {
+            await $host.post("/auth/verify_email", {
                 user_id: userId,
-                reset_token: token, // используем собранный код
+                verification_code:    resetToken
             });
             setStep(3);
         } catch (e) {
-            alert(e.response?.data?.message ?? "Ошибка верификации");
+            alert(e.response?.data?.message ?? "Ошибка верфикации");
         }
     };
 

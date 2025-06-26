@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
+import {MAIN} from "../../../app/routes/constans.js";
 
 const Header = () => {
     const [isBouncing, setIsBouncing] = React.useState(false);
@@ -71,7 +72,7 @@ const Header = () => {
                     : "bg-gradient-to-t lg:to-[#00000060] to-[#00000060] from-[#C2CED8]"
             }`}>
                 <img src="/photos/main/Profile.svg" className="h-[20px] lg:hidden block cursor-pointer" alt="" />
-                <img className="w-[110px]" src="/photos/main/MNEIDET.svg" alt="" />
+                <img className="w-[110px] cursor-pointer" src="/photos/main/MNEIDET.svg" alt="" onClick={() => nav(MAIN)}/>
                 <img src="/photos/main/Burger.svg" className="h-[20px] lg:hidden block cursor-pointer" alt="" onClick={() => setIsOpen(!isOpen)} />
                 <div className="lg:flex flex-row xl:gap-[45px] gap-[25px] items-center justify-end hidden">
                     <a className="font-montserrat font-medium text-[12px] text-white whitespace-nowrap cursor-pointer" href='/#why-main'>Преимущества</a>
@@ -185,7 +186,7 @@ const Header = () => {
             <img style={{ transitionDuration: '2000ms' }} className={`absolute h-[580px] lg:block hidden z-20 lg:right-0 md:-right-[20%] -right-[50%] transform ease-in-out ${isBouncing ? "top-[0%]" : "-top-[5%]"}`} src="/photos/main/Soplya3.png" alt="" />
             <div className={`${isOpen ? "flex" : "hidden"} w-full z-50 absolute top-0 left-0 flex-col bg-[rgb(130,148,155)] h-full`}>
                 <div className="w-full flex mt-5">
-                    <img src="/photos/main/MNEIDET.svg" alt="" className="mx-auto h-[20px]" />
+                    <img src="/photos/main/MNEIDET.svg" alt="" className="mx-auto h-[20px] cursor-pointer" onClick={() => nav(MAIN)}/>
                     <img src="/photos/main/cross-svgrepo-com.svg" alt="" className="absolute right-5 top-3 w-[36px] cursor-pointer" onClick={() => setIsOpen(!isOpen)} />
                 </div>
                 <div className="w-full flex flex-col items-center justify-center h-full gap-14">

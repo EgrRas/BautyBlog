@@ -1,4 +1,4 @@
-import {$authHost, $host} from "../../../app/indexAPI.js";
+import {$authHost} from "../../../app/indexAPI.js";
 
 export const  getUsersStyle = async () => {
     try {
