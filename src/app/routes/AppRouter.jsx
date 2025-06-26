@@ -1,6 +1,6 @@
 import React, {Suspense, useEffect, useState} from 'react';
 import {Routes, Route, Navigate, useLocation} from 'react-router-dom';
-import {FORGOTT_PASSWORD, LOGIN, MAIN, PAYMENT, REGISTER} from './constans.js';
+import {FORGOTT_PASSWORD, LOGIN, MAIN, PAYMENT, REGISTER, VERIFY} from './constans.js';
 import { nonAuthorise, authorise, authRoutes } from './routes.js';
 import {useDispatch, useSelector} from "react-redux";
 import {selectIsAuthenticated} from "../../features/Auth/model/selector.js";
@@ -22,6 +22,7 @@ const AppRouter = () => {
         LOGIN,
         REGISTER,
         FORGOTT_PASSWORD,
+        VERIFY
     ]);
 
     useEffect(() => {

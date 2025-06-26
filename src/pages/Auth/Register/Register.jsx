@@ -59,7 +59,8 @@ const Register = () => {
         setIsSubmitting(true);
 
         try {
-            const {data} = await fetchRegister(values);
+            const data = await fetchRegister(values);
+
             localStorage.setItem('userId' , String(data.user_id))
             nav(VERIFY);
         } catch (error) {

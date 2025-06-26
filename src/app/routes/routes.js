@@ -1,5 +1,6 @@
 import {lazy} from "react";
-import {FORGOTT_PASSWORD, LK, LOGIN, MAIN, PAYMENT, REGISTER} from "./constans.js";
+import {FORGOTT_PASSWORD, LK, LOGIN, MAIN, PAYMENT, REGISTER, VERIFY} from "./constans.js";
+import Verify from "../../pages/Auth/Verify/Verify.jsx";
 
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage.jsx"));
 const WhereMoney = lazy(() => import("../../pages/Lk/WhereMoney.jsx"));
@@ -40,5 +41,9 @@ export const authRoutes = [
     {
         path: FORGOTT_PASSWORD,
         Component: ForgotPassword,
+    },
+    {
+        path:VERIFY,
+        Component: Verify,
     }
 ]
