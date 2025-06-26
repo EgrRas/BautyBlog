@@ -220,7 +220,12 @@ const ForgotPassword = () => {
                                     className={`text-center mb-5 font-montserrat ${
                                         timer === 0 ? 'cursor-pointer text-blue-500' : 'text-gray-400 cursor-not-allowed'
                                     }`}
-                                    onClick={timer === 0 ? () => startTimer(30) : undefined}
+                                    onClick={async () => {
+                                        if (timer === 0) {
+                                            await sendMail();
+                                            startTimer(40);
+                                        }
+                                    }}
                                 >
                                     {timer === 0
                                         ? 'отправить код повторно'

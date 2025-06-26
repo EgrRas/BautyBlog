@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {$host} from "../../../app/indexAPI.js";
-import {MAIN} from "../../../app/routes/constans.js";
+import {MAIN, VERIFY} from "../../../app/routes/constans.js";
 
 
 
@@ -13,6 +13,7 @@ const Verify = () => {
     const timerRef = useRef(null);
     const userId = localStorage.getItem("userId");
     const [resetToken, setResetToken] = React.useState("");
+    const userInfo = JSON.parse(localStorage.getItem("infoToResent"))
 
 
     const startTimer = (sec = 40) => {
@@ -27,6 +28,24 @@ const Verify = () => {
                 return t - 1;
             });
         }, 1000);
+    };
+
+    const fetchRegister = async (data) => {
+        const response = await $host.post(`/auth/register`, data);
+        return response.data;
+    };
+
+    const ResentCode = async (userInfo) => {
+        try {
+            const data = await fetchRegister(userInfo);
+
+            localStorage.setItem('userId' , String(data.user_id))
+        } catch (error) {
+            console.error("Ошибка регистрации:", error);
+            if (error?.response?.data?.message) {
+                alert(error.response.data.message);
+            }
+        }
     };
 
     useEffect(() => {
@@ -148,7 +167,12 @@ const Verify = () => {
                                     className={`text-center mb-5 font-montserrat ${
                                         timer === 0 ? 'cursor-pointer text-blue-500' : 'text-gray-400 cursor-not-allowed'
                                     }`}
-                                    onClick={timer === 0 ? () => startTimer(30) : undefined}
+                                    onClick={async () => {
+                                        if (timer === 0) {
+                                            await ResentCode(userInfo);
+                                            startTimer(40);
+                                        }
+                                    }}
                                 >
                                     {timer === 0
                                         ? 'отправить код повторно'

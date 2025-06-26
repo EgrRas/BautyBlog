@@ -61,6 +61,7 @@ const Register = () => {
             const data = await fetchRegister(values);
 
             localStorage.setItem('userId' , String(data.user_id))
+            localStorage.setItem('infoToResent', JSON.stringify(values))
             nav(VERIFY);
         } catch (error) {
             console.error("Ошибка регистрации:", error);
