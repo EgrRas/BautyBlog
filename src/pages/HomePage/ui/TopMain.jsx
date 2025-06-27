@@ -92,11 +92,11 @@ const TopMain = () => {
                 <img className="w-[110px] cursor-pointer" src="/photos/main/MNEIDET.svg" alt="" onClick={() => nav(MAIN)}/>
                 <img src="/photos/main/Burger.svg" className="h-[20px] lg:hidden block cursor-pointer" alt="" onClick={() => setIsOpen(!isOpen)}/>
                 <div className="lg:flex flex-row xl:gap-[45px] gap-[25px] items-center justify-end hidden">
-                    <a className="font-montserrat font-medium text-[12px] text-white whitespace-nowrap cursor-pointer" href='#why-main'>Преимущества</a>
-                    <a className="font-montserrat font-medium text-[12px] text-white whitespace-nowrap cursor-pointer" href='#about'>О сервисе</a>
-                    <a className="font-montserrat font-medium text-[12px] text-white whitespace-nowrap cursor-pointer" href='#questions'>Ответы на вопросы</a>
-                    <a className="font-montserrat font-medium text-[12px] text-white whitespace-nowrap cursor-pointer" href='#examples'>Примеры результатов</a>
-                    <a className="px-7 h-12 flex items-center justify-center rounded-full !border text-[11px] !border-white font-light uppercase text-white font-unbounded cursor-pointer" onClick={() => nav("/login")}>войти</a>
+                    <a className="font-montserrat font-medium text-[14px] text-white whitespace-nowrap cursor-pointer" href='#why-main'>Преимущества</a>
+                    <a className="font-montserrat font-medium text-[14px] text-white whitespace-nowrap cursor-pointer" href='#about'>О сервисе</a>
+                    <a className="font-montserrat font-medium text-[14px] text-white whitespace-nowrap cursor-pointer" href='#questions'>Ответы на вопросы</a>
+                    <a className="font-montserrat font-medium text-[14px] text-white whitespace-nowrap cursor-pointer" href='#examples'>Примеры результатов</a>
+                    <a className="px-7 h-12 flex items-center justify-center rounded-full !border text-[13px] !border-white font-light uppercase text-white font-unbounded cursor-pointer" onClick={() => nav("/login")}>войти</a>
                 </div>
             </div>
             <div className="absolute z-10 lg:top-36 top-[400px] lg:left-[20%] lg:w-[250px] w-full lg:text-left text-center lg:p-0 p-8">
@@ -116,7 +116,16 @@ const TopMain = () => {
             >
                 Узнай свой типаж
             </div>
-            <img style={{ transitionDuration: '2000ms' }} className={`absolute h-[750px] w-auto z-20 transform ease-in-out lg:left-0 md:-left-[50%] -left-[40%] ${isBouncing ? "lg:top-[10%] -top-[20%]" : "lg:top-[5%] -top-[25%]" }`} src="/photos/main/Soplya.png" alt=""/>
+            <img style={{ transitionDuration: '2000ms' }} className={`absolute h-[750px] lg:block hidden w-auto z-20 transform ease-in-out lg:left-0 md:-left-[50%] -left-[40%] ${isBouncing ? "top-[10%]" : "top-[5%]" }`} src="/photos/main/Soplya.png" alt=""/>
+            <img
+                style={{
+                    transitionDuration: '2000ms',
+                    transform: window.innerWidth >= 768 ? 'scale(-1, 1)' : 'scale(-2, 2)',
+                }}
+                className="absolute lg:hidden z-20 ease-in-out lg:left-0 md:-left-[75%] -left-[80%] top-[0%]"
+                src="/photos/main/Soplya2.png"
+                alt=""
+            />
             <img style={{ transitionDuration: '2000ms' }} className={`absolute h-[580px] z-20 lg:right-0 md:-right-[20%] -right-[50%] transform ease-in-out ${isBouncing ? "top-[0%]" : "-top-[5%]" }`} src="/photos/main/Soplya3.png" alt=""/>
             <div className={`${isOpen ? "flex" : "hidden"} w-full z-50 absolute top-0 left-0 flex-col bg-[rgb(130,148,155)] h-full`}>
                 <div className="w-full flex mt-5">
