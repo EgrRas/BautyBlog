@@ -1,18 +1,42 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
 import {MAIN} from "../../../app/routes/constans.js";
+import {useDispatch} from "react-redux";
+import { $host} from "../../../app/indexAPI.js";
+import {logout} from "../../../features/Auth/model/slice.js";
 
 const Header = () => {
+    const dispatch = useDispatch();
+
+
     const [isBouncing, setIsBouncing] = React.useState(false);
     const [isOpen, setIsOpen] = React.useState(false);
     const nav = useNavigate();
-    const { isAuthenticated } = true
+
 
     const [step, setStep] = React.useState(0); // 0 1 2 - функциональные, 3 - загрузка
     const [photoFile, setPhotoFile] = React.useState(null);
     const [styleId, setStyleId] = React.useState(null);
     const [error, setError] = React.useState('');
     const [paymentStatus, setPaymentStatus] = React.useState(null);
+
+    const handleLogout = async () => {
+        const refreshToken = localStorage.getItem('refresh_token')
+        try {
+            if (!refreshToken) {
+                dispatch(logout());
+            }
+            await $host.post("/auth/logout", {
+                refresh_token: localStorage.getItem('refresh_token')
+            });
+            localStorage.removeItem("refresh_token");
+            dispatch(logout());
+        }catch (error) {
+            throw error;
+        }
+    }
+
+
 
 
     React.useEffect(() => {
@@ -79,7 +103,7 @@ const Header = () => {
                     <a className="font-montserrat font-medium text-[12px] text-white whitespace-nowrap cursor-pointer" href='/#about'>О сервисе</a>
                     <a className="font-montserrat font-medium text-[12px] text-white whitespace-nowrap cursor-pointer" href='/#questions'>Ответы на вопросы</a>
                     <a className="font-montserrat font-medium text-[12px] text-white whitespace-nowrap cursor-pointer" href='/#examples'>Примеры результатов</a>
-                    <a className="px-7 h-12 flex items-center justify-center rounded-full !border text-[11px] !border-white font-light uppercase text-white font-unbounded cursor-pointer" onClick={() => nav("/login")}>войти</a>
+                    <a className="px-7 h-12 flex items-center justify-center rounded-full !border text-[11px] !border-white font-light uppercase text-white font-unbounded cursor-pointer" onClick={() => handleLogout()}>Выйти</a>
                 </div>
             </div>
 
@@ -196,9 +220,13 @@ const Header = () => {
                         <a className="font-montserrat font-normal text-[16px] text-white whitespace-nowrap cursor-pointer" href='/#questions'>Ответы на вопросы</a>
                         <a className="font-montserrat font-normal text-[16px] text-white whitespace-nowrap cursor-pointer" href='/#examples'>Результаты</a>
                     </div>
-                    <div className="flex w-full flex-col gap-3 items-center justify-center">
-                        <div className="w-12 h-12 border rounded-full border-white flex items-center justify-center cursor-pointer" onClick={() => nav("/login")}> <img src="/photos/main/Profile.svg" className="w-6" alt="" /> </div>
-                        <p className="text-center font-montserrat font-light text-[16px] text-white cursor-pointer" onClick={() => nav("/login")}>Войти</p>
+                    <div
+                        onClick={() => handleLogout()}
+                        className="flex w-full flex-col gap-3 items-center justify-center">
+                        <div className="w-12 h-12 border rounded-full border-white flex items-center justify-center cursor-pointer" >
+                            <img src="/photos/main/Profile.svg" className="w-6" alt="" />
+                        </div>
+                        <p className="text-center font-montserrat font-light text-[16px] text-white cursor-pointer" >Выйти</p>
                     </div>
                 </div>
             </div>

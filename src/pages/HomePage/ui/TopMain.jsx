@@ -1,27 +1,22 @@
 import React, {useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
 import {LK, MAIN} from "../../../app/routes/constans.js";
-import {useDispatch, useSelector} from "react-redux";
 import {selectIsAuthenticated} from "../../../features/Auth/model/selector.js";
-import {$host} from "../../../app/indexAPI.js";
+import {$authHost} from "../../../app/indexAPI.js";
+import {useSelector} from "react-redux";
 
 const TopMain = () => {
 
     const [isBouncing, setIsBouncing] = React.useState(false);
     const [isOpen, setIsOpen] = React.useState(false);
     const nav = useNavigate();
-    const dispatch = useDispatch();
     const isAuth = useSelector(selectIsAuthenticated);
-    const [info, setInfo] = React.useState({
-        birth_date: "",
-        email: "",
-        first_name: "",
-        last_name: "",
-    });
+    const [info, setInfo] = React.useState(null);
+    const [loadingInfo, setLoadingInfo] = React.useState(false);
 
     const fetchInfo = async () => {
         try {
-            const { data } = await $host.get("/v1/profile/info");
+            const { data } = await $authHost.get("/profile/info");
             return data;
         } catch (error) {
             console.log(error);
@@ -30,17 +25,18 @@ const TopMain = () => {
     };
 
     useEffect(() => {
-        if (isAuth) {
-            const fetchData = async () => {
-                const data = await fetchInfo();
-                if (data) setInfo(data);
-            };
-            fetchData();
-        }
-    }, [isAuth]);
+        const fetchData = async () => {
+            setLoadingInfo(true);
+            const data = await fetchInfo();
+            if (data) setInfo(data);
+            setLoadingInfo(false);
+        };
+
+        fetchData();
+    }, []);
 
 
-    React.useEffect(() => {
+    useEffect(() => {
         const interval = setInterval(() => {
             setIsBouncing(prev => !prev);
         }, 2000);
@@ -131,10 +127,19 @@ const TopMain = () => {
                         <a className="font-montserrat font-light text-[16px] text-white whitespace-nowrap cursor-pointer" href='#examples'>Результаты</a>
                     </div>
                     <div className="flex w-full flex-col gap-3 items-center justify-center">
-                        <div className="w-12 h-12 border rounded-full border-white flex items-center justify-center cursor-pointer" onClick={() => nav("/login")}>
+                        <div
+                            className="w-12 h-12 border rounded-full border-white flex items-center justify-center cursor-pointer"
+                            onClick={() => nav("/login")}>
                             <img src="/photos/main/Profile.svg" className="w-6" alt=""/>
                         </div>
-                        <p className="text-center font-montserrat font-light text-[16px] text-white cursor-pointer" onClick={() => isAuth ? nav(LK) : nav("/login")}>{length.info > 0 ? info.first_name : "Войти"}</p>
+                        <p
+                            className="text-center font-montserrat font-light text-[16px] text-white cursor-pointer"
+                            onClick={() => isAuth ? nav(LK) : nav("/login")}
+                        >
+                            {!isAuth ? "Войти"
+                                : loadingInfo ? "Загрузка..."
+                                    : info?.first_name ?? "Войти"}
+                        </p>
                     </div>
                 </div>
             </div>

@@ -1,9 +1,12 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import { $host } from "../../../app/indexAPI.js";
-import {VERIFY} from "../../../app/routes/constans.js";
+import {LK, VERIFY} from "../../../app/routes/constans.js";
+import {useSelector} from "react-redux";
+import {selectIsAuthenticated} from "../../../features/Auth/model/selector.js";
 
 const Register = () => {
+    const isAuth = useSelector(selectIsAuthenticated);
     const [showPassword, setShowPassword] = useState(false);
     const [showRepeatPassword, setShowRepeatPassword] = useState(false);
     const [isActive, setIsActive] = useState(false);
@@ -72,6 +75,12 @@ const Register = () => {
             setIsSubmitting(false);
         }
     };
+
+    useEffect(() => {
+        if (isAuth) {
+            nav(LK, { replace: true });
+        }
+    }, [isAuth]);
 
 
 

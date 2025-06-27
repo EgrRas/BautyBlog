@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 import {$host} from "../../../app/indexAPI.js";
 import {LK} from "../../../app/routes/constans.js";
 import { login } from "../../../features/Auth/model/slice.js";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {selectIsAuthenticated} from "../../../features/Auth/model/selector.js";
 
 const Login = () => {
+    const isAuth = useSelector(selectIsAuthenticated);
     const [showPassword, setShowPassword] = useState(false);
     const [values, setValues] = useState({ email: '', password: '' });
     const [errors, setErrors] = useState({});
@@ -72,6 +74,13 @@ const Login = () => {
     useEffect(() => {
         setTimeout(() => setIsModalErrorOpen(false), 10000);
     }, [handleSubmit])
+
+
+    useEffect(() => {
+        if (isAuth) {
+            nav(LK, { replace: true });
+        }
+    }, [isAuth]);
 
     return (
         <form onSubmit={handleSubmit} className="w-full min-h-screen flex justify-center items-center">

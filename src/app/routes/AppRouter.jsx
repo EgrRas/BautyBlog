@@ -4,7 +4,7 @@ import {FORGOTT_PASSWORD, LOGIN, MAIN, PAYMENT, REGISTER, VERIFY} from './consta
 import { nonAuthorise, authorise, authRoutes } from './routes.js';
 import {useDispatch, useSelector} from "react-redux";
 import {selectIsAuthenticated} from "../../features/Auth/model/selector.js";
-import { logout, setIsAuthenticated} from "../../features/Auth/model/slice.js";
+import {logout, resetUser, setIsAuthenticated, setUser} from "../../features/Auth/model/slice.js";
 import {getUsersStyle} from "../../pages/Lk/api/lkAPI.js";
 import Loading from "../../pages/Helpers/Loading.jsx";
 
@@ -34,10 +34,12 @@ const AppRouter = () => {
 
         (async () => {
             try {
-                await getUsersStyle();
+                const data = await getUsersStyle();
                 dispatch(setIsAuthenticated(true));
+                dispatch(setUser(data))
             } catch {
                 dispatch(logout());
+                dispatch(resetUser())
             } finally {
                 setLoading(false)
             }
