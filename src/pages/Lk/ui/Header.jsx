@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
-import {MAIN} from "../../../app/routes/constans.js";
+import {LK, MAIN} from "../../../app/routes/constans.js";
 import {useDispatch} from "react-redux";
 import { $host} from "../../../app/indexAPI.js";
 import {logout} from "../../../features/Auth/model/slice.js";
@@ -95,7 +95,7 @@ const Header = () => {
                     ? "bg-gradient-to-t lg:to-[#00000040] to-[#00000030] from-[#C2CED8]"
                     : "bg-gradient-to-t lg:to-[#00000060] to-[#00000060] from-[#C2CED8]"
             }`}>
-                <img src="/photos/main/Profile.svg" className="h-[20px] lg:hidden block cursor-pointer" alt="" />
+                <img src="/photos/main/Profile.svg" className="h-[20px] lg:hidden block cursor-pointer" alt=""/>
                 <img className="w-[110px] cursor-pointer" src="/photos/main/MNEIDET.svg" alt="" onClick={() => nav(MAIN)}/>
                 <img src="/photos/main/Burger.svg" className="h-[20px] lg:hidden block cursor-pointer" alt="" onClick={() => setIsOpen(!isOpen)} />
                 <div className="lg:flex flex-row xl:gap-[45px] gap-[25px] items-center justify-end hidden">

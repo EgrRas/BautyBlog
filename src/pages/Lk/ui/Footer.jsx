@@ -12,7 +12,7 @@ const Footer = () => {
             <div className="w-full lg:px-60 px-5 lg:py-20 pt-20 pb-5 flex lg:flex-row lg:justify-between flex-col gap-5 relative">
                 <div className="flex flex-col lg:justify-between gap-5 lg:min-h-[200px]">
                     <div className="flex flex-col lg:gap-10 gap-5 lg:items-left items-center">
-                        <img src="/photos/main/MNEIDET_BLACK.svg" alt="" className="w-[150px] cursor-pointer" onClick={() => nav(MAIN)}/>
+                        <img src="/photos/main/MNEIDET_BLUE.svg" alt="" className="w-[150px] cursor-pointer" onClick={() => nav(MAIN)}/>
                         <p className="font-montserrat uppercase text-[20px] font-light lg:text-left text-center">Email</p>
                     </div>
                     <p className="font-montserrat uppercase text-[12px] font-light lg:block hidden">
