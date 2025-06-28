@@ -1,12 +1,18 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useNavigate } from "react-router-dom";
+import {useSelector} from "react-redux";
+import {selectIsAuthenticated} from "../../features/Auth/model/selector.js";
 
 const WhereMoney = () => {
     const [step, setStep] = React.useState(0);
     const [isActive, setIsActive] = React.useState(false);
     const nav = useNavigate();
     const [isLoading, setIsLoading] = React.useState(true);
+    const isAuth = useSelector(selectIsAuthenticated);
 
+    useEffect(() => {
+        isAuth ? setStep(1) : setStep(0);
+    }, [])
 
     return (
         <div className="w-full h-screen relative">

@@ -110,12 +110,12 @@ const TopMain = () => {
                     Наш искусственный интеллект анализирует черты лица и определяет типаж по системе
                     <span className="block font-semibold">MNE IDET</span>
                 </p>
-                <div className="lg:hidden mx-auto mt-10 md:mt-10 top-[85%] font-unbounded w-[240px] h-[50px] flex items-center justify-center rounded-full border border-[#ffffff] backdrop-blur-xl text-[#1B3C4D] bg-white/40 uppercase text-[12px] font-light cursor-pointer hover:shadow-xl transition duration-200" onClick={() => nav("/Lk")}>
+                <div className="lg:hidden mx-auto mt-10 md:mt-10 top-[85%] font-unbounded w-[240px] h-[50px] flex items-center justify-center rounded-full border border-[#ffffff] backdrop-blur-xl text-[#1B3C4D] bg-white/40 uppercase text-[12px] font-light cursor-pointer hover:shadow-xl transition duration-200" onClick={() => nav("/payment")}>
                     Узнай свой типаж
                 </div>
             </div>
             <div className="absolute left-1/2 transform -translate-x-1/2 top-[85%] w-[240px] h-[50px] lg:flex hidden items-center justify-center rounded-full bg-[#1B3C4D] text-white uppercase text-[12px] font-light cursor-pointer hover:shadow-xl transition duration-200 font-unbounded z-50"
-                 onClick={() => nav("/lk")}
+                 onClick={() => nav("/payment")}
             >
                 Узнай свой типаж
             </div>
