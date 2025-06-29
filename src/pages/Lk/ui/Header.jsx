@@ -1,10 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useNavigate } from "react-router-dom";
-import {MAIN} from "../../../app/routes/constans.js";
-import {useDispatch, useSelector} from "react-redux";
+import {MAIN, PAYMENT} from "../../../app/routes/constans.js";
+import {useDispatch} from "react-redux";
 import {$authHost, $host} from "../../../app/indexAPI.js";
 import {logout} from "../../../features/Auth/model/slice.js";
-import {selectIsAuthenticated} from "../../../features/Auth/model/selector.js";
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -13,14 +12,8 @@ const Header = () => {
     const [isBouncing, setIsBouncing] = React.useState(false);
     const [isOpen, setIsOpen] = React.useState(false);
     const nav = useNavigate();
-
-
     const [step, setStep] = React.useState(0); // 0 1 2 - функциональные, 3 - загрузка
     const [photoFile, setPhotoFile] = React.useState(null);
-    const [styleId, setStyleId] = React.useState(null);
-    const [error, setError] = React.useState('');
-    const [paymentStatus, setPaymentStatus] = React.useState(null);
-    const isAuth = useSelector(selectIsAuthenticated);
 
     const handleLogout = async () => {
         const refreshToken = localStorage.getItem('refresh_token')
@@ -39,8 +32,34 @@ const Header = () => {
         }
     }
 
+    //----------------------API
 
+    const getInfo = async () => {
+        try {
+            const response = await $authHost.get("style/info");
+            return { status: response.status, data: response.data };
+        } catch (error) {
+            if (error.response) {
+                return { status: error.response.status };
+            } else {
+                console.log("Unexpected error:", error);
+                return { status: 500 };
+            }
+        }
+    };
 
+    const styleBuild = async (formData) => {
+        try {
+            const response = await $authHost.post("style/build", formData, {
+                headers: { "Content-Type": "multipart/form-data" },
+            });
+            return response.data;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    //_______________________
 
     React.useEffect(() => {
         const interval = setInterval(() => {
@@ -62,29 +81,37 @@ const Header = () => {
         };
     }, [isOpen]);
 
-    const handlePhotoUpload = async (file) => {
-        if (!isAuth || paymentStatus !== 'paid') {
-            nav('/payment');
-            return;
+    const verfication = async () => {
+        setStep(3)
+        const response = await getInfo()
+        if (response.status === 200) {
+            setStep(1)
+        } else if (response.status === 404) {
+            setStep(0)
+        } else {
+            nav(PAYMENT)
         }
+    }
 
+    //ФОТО----------------
+
+    const handlePhotoUpload = async (file) => {
         if (!file) return;
-        setStep(3);
 
         const formData = new FormData();
-        formData.append('photo', file);
+        formData.append("photo", file);
 
-        try{
-            const {data} = await $authHost.post("/style/build", formData);
-            return data
-        } catch(error){
-            console.log(error);
-            throw error;
-        } finally {
-            setStep(1)
+        try {
+            setStep(3);
+            const response = await styleBuild(formData)
+            window.location.href = response.style_id
+        } catch (err) {
+            console.error("upload error:", err);
+            setStep(0);
         }
     };
 
+    useEffect(() => {verfication()}, [])
 
     return (
         <div className={`w-full lg:h-auto min-h-screen relative`}>
@@ -163,7 +190,7 @@ const Header = () => {
                             <p className="text-center font-montserrat font-normal text-[14px] cursor-pointer">Имя</p>
                         </div>
 
-                        <img src="/photos/LK/Step2.png" className="lg:w-[17%] w-[70%] max-w-[150px] cursor-pointer hover:scale-95 transition ease-in-out duration-200" alt="" onClick={() => setStep(2)}/>
+                        <img src="/photos/LK/Step1.png" className="lg:w-[17%] w-[70%] max-w-[150px] cursor-pointer hover:scale-95 transition ease-in-out duration-200" alt="" onClick={() => setStep(2)}/>
                         <p className="text-center font-montserrat font-light text-[12px] uppercase">
                             нажмите на иконку,  чтобы НАЧАТЬ <br className="lg:block hidden"/> ТИПИРОВАНИЕ
                         </p>
@@ -176,30 +203,30 @@ const Header = () => {
                 </div>
             )}
 
-            {step === 2 && (
-                <div className="absolute top-[55%] left-1/2 -translate-x-1/2 -translate-y-1/2 lg:h-[80%] h-[70%] lg:block flex flex-col items-center justify-between text-[#1B3C4D]">
-                    <div className="flex flex-col items-center lg:justify-around justify-start h-full gap-4">
-                        <p className="lg:text-[30px] text-[23px] font-unbounded font-extralight text-center uppercase" >Добро пожаловать в <br className="lg:block hidden" /> SUITSME.AI</p>
-                        <div className="flex flex-col items-center justify-center gap-2">
-                            <div
-                                className="w-10 h-10 border rounded-full border-white flex items-center justify-center cursor-pointer">
-                                <img src="/photos/main/Profile.svg" className="w-4" alt="" />
-                            </div>
-                            <p className="text-center font-montserrat font-normal text-[14px] cursor-pointer">Имя</p>
-                        </div>
-                        <p className="text-center font-montserrat font-light lg:text-[12px] text-[10px]  uppercase">ВАШ ТИПАЖ</p>
-                        <img src="/photos/LK/Step1.png" className="lg:w-[17%] w-[70%] max-w-[150px] cursor-pointer hover:scale-95 transition ease-in-out duration-200" alt="" onClick={() => setStep(0)}/>
-                        <p className="text-center font-montserrat font-light text-[12px] uppercase">
-                            нажмите на иконку, чтобы посмотреть <br className="lg:block hidden"/> результат
-                        </p>
-                        <img src="/photos/main/MiddleWoman.png" className="lg:block hidden w-[65%]" alt=""/>
-                    </div>
-                    <div className="uppercase font-light text-center text-[13px] lg:hidden block">
-                        Здесь может быть размещен
-                        какой-то текст
-                    </div>
-                </div>
-            )}
+            {/*{step === 2 && (*/}
+            {/*    <div className="absolute top-[55%] left-1/2 -translate-x-1/2 -translate-y-1/2 lg:h-[80%] h-[70%] lg:block flex flex-col items-center justify-between text-[#1B3C4D]">*/}
+            {/*        <div className="flex flex-col items-center lg:justify-around justify-start h-full gap-4">*/}
+            {/*            <p className="lg:text-[30px] text-[23px] font-unbounded font-extralight text-center uppercase" >Добро пожаловать в <br className="lg:block hidden" /> SUITSME.AI</p>*/}
+            {/*            <div className="flex flex-col items-center justify-center gap-2">*/}
+            {/*                <div*/}
+            {/*                    className="w-10 h-10 border rounded-full border-white flex items-center justify-center cursor-pointer">*/}
+            {/*                    <img src="/photos/main/Profile.svg" className="w-4" alt="" />*/}
+            {/*                </div>*/}
+            {/*                <p className="text-center font-montserrat font-normal text-[14px] cursor-pointer">Имя</p>*/}
+            {/*            </div>*/}
+            {/*            <p className="text-center font-montserrat font-light lg:text-[12px] text-[10px]  uppercase">ВАШ ТИПАЖ</p>*/}
+            {/*            <img src="/photos/LK/Step2.png" className="lg:w-[17%] w-[70%] max-w-[150px] cursor-pointer hover:scale-95 transition ease-in-out duration-200" alt="" onClick={() => setStep(0)}/>*/}
+            {/*            <p className="text-center font-montserrat font-light text-[12px] uppercase">*/}
+            {/*                нажмите на иконку, чтобы посмотреть <br className="lg:block hidden"/> результат*/}
+            {/*            </p>*/}
+            {/*            <img src="/photos/main/MiddleWoman.png" className="lg:block hidden w-[65%]" alt=""/>*/}
+            {/*        </div>*/}
+            {/*        <div className="uppercase font-light text-center text-[13px] lg:hidden block">*/}
+            {/*            Здесь может быть размещен*/}
+            {/*            какой-то текст*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*)}*/}
 
 
             {step === 3 && (

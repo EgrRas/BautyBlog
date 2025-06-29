@@ -78,7 +78,7 @@ const Register = () => {
 
     useEffect(() => {
         if (isAuth) {
-            nav(LK, { replace: true });
+            nav("/", { replace: true });
         }
     }, [isAuth]);
 

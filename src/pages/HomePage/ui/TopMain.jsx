@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useNavigate} from "react-router-dom";
-import {LK, MAIN} from "../../../app/routes/constans.js";
+import {MAIN, PAYMENT} from "../../../app/routes/constans.js";
 import {useSelector} from "react-redux";
 import {selectIsAuthenticated} from "../../../features/Auth/model/selector.js";
 import {$host} from "../../../app/indexAPI.js";
@@ -88,7 +88,7 @@ const TopMain = () => {
             <img className="h-full w-[30%]  z-10 absolute top-0 left-0 lg:block hidden" src="/photos/main/LeftBlur.png" alt="" />
             <img className="h-full w-[30%]  z-10 absolute top-0 right-0 lg:block hidden" src="/photos/main/Rectangle.png" alt="" />
             <div className="backdrop-blur-sm bg-black/15 z-30 w-full lg:h-[130px] h-[60px] absolute top-0 left-0 flex flex-row items-center justify-between lg:px-20 px-5">
-                <img src="/photos/main/Profile.svg" className="h-[20px] lg:hidden block cursor-pointer" alt="" onClick={() => nav(LK)}/>
+                <img src="/photos/main/Profile.svg" className="h-[20px] lg:hidden block cursor-pointer" alt="" onClick={() => nav(PAYMENT)}/>
                 <img className="w-[110px] cursor-pointer" src="/photos/main/MNEIDET.svg" alt="" onClick={() => nav(MAIN)}/>
                 <img src="/photos/main/Burger.svg" className="h-[20px] lg:hidden block cursor-pointer" alt="" onClick={() => setIsOpen(!isOpen)}/>
                 <div className="lg:flex flex-row xl:gap-[45px] gap-[25px] items-center justify-end hidden">
@@ -144,9 +144,9 @@ const TopMain = () => {
                     </div>
                     <div className="flex w-full flex-col gap-3 items-center justify-center">
                         <div className="w-12 h-12 border rounded-full border-white flex items-center justify-center cursor-pointer" onClick={() => nav("/login")}>
-                            <img src="/photos/main/Profile.svg" className="w-6" alt="" onClick={() => nav(LK)}/>
+                            <img src="/photos/main/Profile.svg" className="w-6" alt="" onClick={() => nav(PAYMENT)}/>
                         </div>
-                        <p className="text-center font-montserrat font-light text-[16px] text-white cursor-pointer" onClick={() => isAuth ? nav(LK) : nav("/login")}>{length.info > 0 ? info.first_name : "Войти"}</p>
+                        <p className="text-center font-montserrat font-light text-[16px] text-white cursor-pointer" onClick={() => nav(PAYMENT)}>{length.info > 0 ? info.first_name : "Войти"}</p>
                     </div>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import {$host} from "../../../app/indexAPI.js";
-import {LK} from "../../../app/routes/constans.js";
+import {LK, PAYMENT} from "../../../app/routes/constans.js";
 import { login } from "../../../features/Auth/model/slice.js";
 import {useDispatch, useSelector} from "react-redux";
 import {selectIsAuthenticated} from "../../../features/Auth/model/selector.js";
@@ -62,7 +62,7 @@ const Login = () => {
 
             dispatch(login(data));
 
-            nav(LK);
+            nav(PAYMENT);
         } catch (error) {
             console.error("Ошибка при входе:", error);
             setIsModalErrorOpen(true);
@@ -78,7 +78,7 @@ const Login = () => {
 
     useEffect(() => {
         if (isAuth) {
-            nav(LK, { replace: true });
+            nav("/", { replace: true });
         }
     }, [isAuth]);
 
