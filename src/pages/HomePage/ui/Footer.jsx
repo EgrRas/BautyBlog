@@ -26,7 +26,7 @@ const Footer = () => {
                             }}
                             className="lg:font-montserrat font-unbounded lg:uppercase lg:text-[20px] lg:font-light font-semibold lg:text-left text-center w-full lg:my-0 my-3 cursor-pointer transition-colors duration-200"
                         >
-                            {copied ? "Почта скопирована" : "Email"}
+                            {copied ? "Почта скопирована" : "support@mne-idet.ru"}
                         </p>
                     </div>
                     <p className="font-montserrat uppercase text-[12px] font-light lg:block hidden">

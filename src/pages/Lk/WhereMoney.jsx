@@ -227,10 +227,10 @@ const WhereMoney = () => {
                                 alt=""
                                 onClick={() => setIsActive(!isActive)}
                             />
-                            <p className="font-montserrat text-[10px] font-normal text-[#1B3C4D] uppercase leading-tight">
+                            <a className="font-montserrat text-[10px] font-normal text-[#1B3C4D] uppercase leading-tight cursor-pointer" href="https://mneidet.com/privacy/">
                                 Я согласен с условиями <br className="lg:block hidden"/>
                                 лицензионного <br className="lg:hidden"/> соглашения
-                            </p>
+                            </a>
                         </div>
                         <div className="w-full relative">
                             <button
