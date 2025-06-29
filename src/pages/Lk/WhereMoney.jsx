@@ -68,7 +68,7 @@ const WhereMoney = () => {
     const getPaymentStatus = async () => {
         setIsLoading(true);
         const response = await getInfo();
-        if (!response) return setIsLoading(false);
+        // if (!response) return setIsLoading(false);
 
         if (response.status === 403) {
             setStep(1);
@@ -103,7 +103,7 @@ const WhereMoney = () => {
             }
 
             let attempts = 0;
-            const maxAttempts = 10;
+            const maxAttempts = 100;
 
             const intervalId = setInterval(async () => {
                 const info = await payInfo();
@@ -117,7 +117,7 @@ const WhereMoney = () => {
                     setIsLoading(false);
                     setError(true);
                 }
-            }, 2000);
+            }, 5000);
         } else {
             setIsLoading(false);
             setStep(1);
