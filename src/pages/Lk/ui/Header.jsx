@@ -153,10 +153,10 @@ const Header = () => {
                             <input
                                 type="file"
                                 accept="image/*"
-                                onChange={(e) => {
+                                onChange={async (e) => {
                                     if (e.target.files[0]) {
                                         setPhotoFile(e.target.files[0]);
-                                        handlePhotoUpload(e.target.files[0]);
+                                        await handlePhotoUpload(e.target.files[0]);
                                     }
                                 }}
                                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-50"
