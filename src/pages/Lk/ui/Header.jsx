@@ -32,7 +32,7 @@ const Header = () => {
         }
     }
 
-    //----------------------API
+    //-------------------------API
 
     const getInfo = async () => {
         try {
@@ -59,7 +59,7 @@ const Header = () => {
         }
     }
 
-    //_______________________
+    //----------------------------
 
     React.useEffect(() => {
         const interval = setInterval(() => {
@@ -171,10 +171,10 @@ const Header = () => {
                         </p>
                         <img src="/photos/main/MiddleWoman.png" className="lg:block hidden w-[65%]" alt="" />
                     </div>
-                    <div className="uppercase font-light text-center text-[13px] lg:hidden block">
-                        Здесь может быть размещен
-                        какой-то текст
-                    </div>
+                    {/*<div className="uppercase font-light text-center text-[13px] lg:hidden block">*/}
+                    {/*    Здесь может быть размещен*/}
+                    {/*    какой-то текст*/}
+                    {/*</div>*/}
                 </div>
             )}
 

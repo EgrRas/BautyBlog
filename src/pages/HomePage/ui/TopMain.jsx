@@ -20,7 +20,7 @@ const TopMain = () => {
 
     const fetchInfo = async () => {
         try {
-            const { data } = await $host.get("/v1/profile/info");
+            const { data } = await $host.get("/profile/info");
             return data;
         } catch (error) {
             console.log(error);
@@ -83,7 +83,7 @@ const TopMain = () => {
                 src="/photos/main/BottomBlur.png"
                 alt=""
             />
-            <div className="absolute md:top-[920px] sm:top-[820px] top-[760px] h-[20px] bg-gray-50/80 backdrop-blur-xl w-full"></div>
+            <div className="absolute md:top-[920px] sm:top-[820px] top-[760px] h-[20px] bg-gray-50/80 backdrop-blur-xl w-full lg:hidden"></div>
 
             <img className="h-full w-[30%]  z-10 absolute top-0 left-0 lg:block hidden" src="/photos/main/LeftBlur.png" alt="" />
             <img className="h-full w-[30%]  z-10 absolute top-0 right-0 lg:block hidden" src="/photos/main/Rectangle.png" alt="" />
