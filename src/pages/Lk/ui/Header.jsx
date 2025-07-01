@@ -13,7 +13,8 @@ const Header = () => {
     const [isOpen, setIsOpen] = React.useState(false);
     const nav = useNavigate();
     const [step, setStep] = React.useState(0); // 0 1 2 - функциональные, 3 - загрузка
-    const [photoFile, setPhotoFile] = React.useState(null);
+    const [ setPhotoFile] = React.useState(null);
+
 
     const handleLogout = async () => {
         const refreshToken = localStorage.getItem('refresh_token')
