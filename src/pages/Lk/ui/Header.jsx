@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import { useNavigate } from "react-router-dom";
-import {MAIN, PAYMENT} from "../../../app/routes/constans.js";
+import {MAIN} from "../../../app/routes/constans.js";
 import {useDispatch} from "react-redux";
 import {$authHost, $host} from "../../../app/indexAPI.js";
 import {logout} from "../../../features/Auth/model/slice.js";
@@ -50,10 +50,11 @@ const Header = () => {
 
     const styleBuild = async (formData) => {
         try {
-            const response = await $authHost.post("style/build", formData, {
+            const {data} = await $authHost.post("style/build", formData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
-            return response.data;
+            console.log(data);
+            return data;
         } catch (error) {
             console.log(error);
         }
@@ -84,12 +85,13 @@ const Header = () => {
     const verfication = async () => {
         setStep(3)
         const response = await getInfo()
+        console.log(response);
         if (response.status === 200) {
             setStep(1)
         } else if (response.status === 404) {
             setStep(0)
         } else {
-            nav(PAYMENT)
+            // nav(PAYMENT)
         }
     }
 
@@ -99,14 +101,22 @@ const Header = () => {
         if (!file) return;
 
         const formData = new FormData();
-        formData.append("photo", file);
+        formData.append('photo', file);
 
         try {
             setStep(3);
-            const response = await styleBuild(formData)
-            window.location.href = response.style_id
+
+            const data = await styleBuild(formData);
+
+            if (data?.style_id) {
+                console.log('✅ style_id получен:', data.style_id);
+                // window.location.href = response.style_id; // или nav() если SPA
+            } else {
+                console.warn('❌ style_id отсутствует в ответе:', data);
+                setStep(0);
+            }
         } catch (err) {
-            console.error("upload error:", err);
+            console.error('Ошибка при загрузке фото:', err);
             setStep(0);
         }
     };
@@ -136,11 +146,7 @@ const Header = () => {
                 <img className="w-[110px] cursor-pointer" src="/photos/main/MNEIDET.svg" alt="" onClick={() => nav(MAIN)}/>
                 <img src="/photos/main/Burger.svg" className="h-[20px] lg:hidden block cursor-pointer" alt="" onClick={() => setIsOpen(!isOpen)} />
                 <div className="lg:flex flex-row xl:gap-[45px] gap-[25px] items-center justify-end hidden">
-                    <a className="font-montserrat font-medium text-[12px] text-white whitespace-nowrap cursor-pointer" href='/#why-main'>Преимущества</a>
-                    <a className="font-montserrat font-medium text-[12px] text-white whitespace-nowrap cursor-pointer" href='/#about'>О сервисе</a>
-                    <a className="font-montserrat font-medium text-[12px] text-white whitespace-nowrap cursor-pointer" href='/#questions'>Ответы на вопросы</a>
-                    <a className="font-montserrat font-medium text-[12px] text-white whitespace-nowrap cursor-pointer" href='/#examples'>Примеры результатов</a>
-                    <a className="px-7 h-12 flex items-center justify-center rounded-full !border text-[11px] !border-white font-light uppercase text-white font-unbounded cursor-pointer" onClick={() => handleLogout()}>Выйти</a>
+                    <button className="px-7 h-12 flex items-center justify-center rounded-full !border text-[11px] !border-white font-light uppercase text-white font-unbounded cursor-pointer" onClick={() => handleLogout()}>Выйти</button>
                 </div>
             </div>
 
@@ -153,10 +159,10 @@ const Header = () => {
                             <input
                                 type="file"
                                 accept="image/*"
-                                onChange={async (e) => {
+                                onChange={ (e) => {
                                     if (e.target.files[0]) {
                                         setPhotoFile(e.target.files[0]);
-                                        await handlePhotoUpload(e.target.files[0]);
+                                        handlePhotoUpload(e.target.files[0]);
                                     }
                                 }}
                                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-50"
@@ -251,12 +257,6 @@ const Header = () => {
                     <img src="/photos/main/cross-svgrepo-com.svg" alt="" className="absolute right-5 top-3 w-[36px] cursor-pointer" onClick={() => setIsOpen(!isOpen)} />
                 </div>
                 <div className="w-full flex flex-col items-center justify-center h-full gap-14">
-                    <div className="flex flex-col gap-5 text-center">
-                        <a className="font-montserrat font-normal text-[16px] text-white whitespace-nowrap cursor-pointer" href='/#why-main'>Преимущества</a>
-                        <a className="font-montserrat font-normal text-[16px] text-white whitespace-nowrap cursor-pointer" href='/#about'>О сервисе</a>
-                        <a className="font-montserrat font-normal text-[16px] text-white whitespace-nowrap cursor-pointer" href='/#questions'>Ответы на вопросы</a>
-                        <a className="font-montserrat font-normal text-[16px] text-white whitespace-nowrap cursor-pointer" href='/#examples'>Результаты</a>
-                    </div>
                     <div
                         onClick={() => handleLogout()}
                         className="flex w-full flex-col gap-3 items-center justify-center">
