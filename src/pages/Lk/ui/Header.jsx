@@ -125,6 +125,17 @@ const Header = () => {
         }
     };
 
+    const reloadInfo = async () => {
+        try {
+            const {data} = await getInfo()
+            setStyle(data.style_id)
+            setStep(2);
+        } catch (error) {
+            console.log(error);
+            setStep(0);
+        }
+    }
+
     useEffect(() => {verfication()}, [])
 
     return (
@@ -196,10 +207,10 @@ const Header = () => {
                                 className="w-10 h-10 border rounded-full border-white flex items-center justify-center cursor-pointer">
                                 <img src="/photos/main/Profile.svg" className="w-4" alt="" />
                             </div>
-                            <p className="text-center font-montserrat font-normal text-[14px] cursor-pointer">Имя</p>
+                            <p className="text-center font-montserrat font-normal text-[14px] cursor-pointer">{user.first_name}</p>
                         </div>
 
-                        <img src="/photos/LK/Step1.png" className="lg:w-[17%] w-[70%] max-w-[150px] cursor-pointer hover:scale-95 transition ease-in-out duration-200" alt="" onClick={() => setStep(2)}/>
+                        <img src="/photos/LK/Step1.png" className="lg:w-[17%] w-[70%] max-w-[150px] cursor-pointer hover:scale-95 transition ease-in-out duration-200" alt="" onClick={() => reloadInfo()}/>
                         <p className="text-center font-montserrat font-light text-[12px] uppercase">
                             нажмите на иконку,  чтобы НАЧАТЬ <br className="lg:block hidden"/> ТИПИРОВАНИЕ
                         </p>
