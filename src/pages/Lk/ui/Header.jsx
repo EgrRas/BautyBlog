@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import {MAIN} from "../../../app/routes/constans.js";
 import {useDispatch, useSelector} from "react-redux";
 import {$authHost, $host} from "../../../app/indexAPI.js";
-import {logout} from "../../../features/Auth/model/slice.js";
+import {logout, setUser} from "../../../features/Auth/model/slice.js";
 import {selectUser} from "../../../features/Auth/model/selector.js";
 
 const Header = () => {
@@ -135,6 +135,21 @@ const Header = () => {
             setStep(0);
         }
     }
+
+    useEffect(() => {
+        if (!user.first_name) {
+            setStep(3);
+            $authHost.get("profile/info")
+                .then(({data}) => {
+                    dispatch(setUser(data));
+                    setStep(1);
+                })
+                .catch((error) => {
+                    console.log(error);
+                    setStep(0);
+                });
+        }
+    }, [user]);
 
     useEffect(() => {verfication()}, [])
 
