@@ -16,6 +16,7 @@ const Header = () => {
     const [step, setStep] = React.useState(0); // 0 1 2 - функциональные, 3 - загрузка
     const [style, setStyle] = React.useState("");
     const user = useSelector(selectUser);
+    const [canUpload, setCanUpload] = React.useState(false);
 
 
     const handleLogout = async () => {
@@ -88,11 +89,12 @@ const Header = () => {
     const verfication = async () => {
         setStep(3)
         const response = await getInfo()
-        //console.log(response);
         if (response.status === 200) {
             setStep(1)
+            setCanUpload(response.can_upload_photos)
         } else if (response.status === 404) {
             setStep(0)
+            setCanUpload(response.can_upload_photos)
         } else {
             //nav(PAYMENT)
         }
@@ -128,6 +130,7 @@ const Header = () => {
     const reloadInfo = async () => {
         try {
             const {data} = await getInfo()
+            setCanUpload(data.can_upload_photos)
             setStyle(data.style_id)
             setStep(2);
         } catch (error) {
@@ -249,6 +252,7 @@ const Header = () => {
                             </div>
                             <p className="text-center font-montserrat font-normal text-[14px] cursor-pointer">{user.first_name}</p>
                         </div>
+                        {canUpload && (<button className="w-32 h-10 border border-white rounded-xl hover:bg-white/50 transition duration-200" onClick={() => setStep(0)}>Повторить</button>)}
                         <p className="text-center font-montserrat text-[25px]">Ваш стиль - <span className="font-semibold ">{style}</span></p>
                         <img src="/photos/main/MiddleWoman.png" className="lg:block hidden w-[65%]" alt=""/>
                     </div>
