@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import { useNavigate } from "react-router-dom";
-import {MAIN} from "../../../app/routes/constans.js";
+import {MAIN, PAYMENT} from "../../../app/routes/constans.js";
 import {useDispatch, useSelector} from "react-redux";
 import {$authHost, $host} from "../../../app/indexAPI.js";
 import {logout, setUser} from "../../../features/Auth/model/slice.js";
@@ -87,19 +87,34 @@ const Header = () => {
     }, [isOpen]);
 
     const verfication = async () => {
-        setStep(3)
-        const response = await getInfo()
-        if (response.status === 200) {
-            setStyle(response.data.style_id);
-            setCanUpload(response.data.can_upload_photos)
-            setStep(2)
-        } else if (response.status === 404) {
-            setStep(0)
-            setCanUpload(response.can_upload_photos)
-        } else {
-            //nav(PAYMENT)
+        setStep(3);
+
+        try {
+            const response = await getInfo();
+            if (response.status === 200) {
+                setStyle(response.data.style_id);
+                setCanUpload(response.data.can_upload_photos);
+                setStep(2);
+            } else if (response.status === 404) {
+                setStep(0);
+                setCanUpload(response?.can_upload_photos);
+            } else if (response.status === 402) {
+                nav(PAYMENT);
+            } else {
+                dispatch(logout());
+                nav(PAYMENT);
+            }
+        } catch (error) {
+            if (error.response?.status === 401) {
+                setTimeout(() => {
+                    verfication();
+                }, 200);
+            } else {
+                dispatch(logout());
+                nav(PAYMENT);
+            }
         }
-    }
+    };
 
     //ФОТО----------------
 
