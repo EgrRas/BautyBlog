@@ -66,25 +66,7 @@ const Header = () => {
 
     //----------------------------
 
-    React.useEffect(() => {
-        const interval = setInterval(() => {
-            setIsBouncing(prev => !prev);
-        }, 2000);
 
-        return () => clearInterval(interval);
-    }, []);
-
-    React.useEffect(() => {
-        if (isOpen) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'auto';
-        }
-
-        return () => {
-            document.body.style.overflow = 'auto';
-        };
-    }, [isOpen]);
 
     const verfication = async () => {
         setStep(3);
@@ -169,6 +151,26 @@ const Header = () => {
                 });
         }
     }, [user]);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setIsBouncing(prev => !prev);
+        }, 2000);
+
+        return () => clearInterval(interval);
+    }, []);
+
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
+    }, [isOpen]);
 
     useEffect(() => {verfication()}, [])
 

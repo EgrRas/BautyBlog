@@ -1,37 +1,26 @@
-import React, {Suspense, useEffect, useState} from 'react';
-import {Routes, Route, Navigate, useLocation} from 'react-router-dom';
-import {FORGOTT_PASSWORD, LOGIN, MAIN, PAYMENT, REGISTER, VERIFY} from './constans.js';
-import { nonAuthorise, authorise, authRoutes } from './routes.js';
+import React, { useEffect} from 'react';
+import {Routes, Route, Navigate} from 'react-router-dom';
+import { MAIN} from './constans.js';
+import { nonAuthorise, authorise } from './routes.js';
 import {useDispatch, useSelector} from "react-redux";
-import {selectIsAuthenticated} from "../../features/Auth/model/selector.js";
-import {logout, resetUser, setIsAuthenticated, setUser} from "../../features/Auth/model/slice.js";
+import {selectIsAuthenticated , selectIsInitialized} from "../../features/Auth/model/selector.js";
+import {logout, resetUser, setInitialized, setIsAuthenticated, setUser} from "../../features/Auth/model/slice.js";
 import {getUsersStyle} from "../../pages/Lk/api/lkAPI.js";
 
 const AppRouter = () => {
-    const location = useLocation();
-
     const dispatch = useDispatch();
     const isAuth = useSelector(selectIsAuthenticated);
+    const isInitialized = useSelector(selectIsInitialized);
 
-    const [loading, setLoading] = useState(true);
-
-
-    const specialRoutesSet = new Set([
-        MAIN,
-        PAYMENT,
-        LOGIN,
-        REGISTER,
-        FORGOTT_PASSWORD,
-        VERIFY
-    ]);
 
     useEffect(() => {
         const tryRestoreSession = async () => {
             const accessToken = localStorage.getItem("access_token");
             if (!accessToken) {
-                setLoading(false);
+                dispatch(setInitialized());
                 return;
             }
+
 
             try {
                 const data = await getUsersStyle();
@@ -40,16 +29,21 @@ const AppRouter = () => {
             } catch {
                 dispatch(logout());
                 dispatch(resetUser());
-            } finally {
-                setLoading(false);
+            }finally {
+                dispatch(setInitialized());
             }
         };
 
         tryRestoreSession();
     }, []);
 
+    if (!isInitialized) {
+        return <div>Загрузка…</div>;
+    }
+
 
     return (
+
             <Routes>
                 {isAuth && authorise.map(({ path, Component }) => (
                     <Route
@@ -63,13 +57,9 @@ const AppRouter = () => {
                 {nonAuthorise.map(({ path, Component }) => (
                     <Route key={path} path={path} element={<Component />} />
                 ))}
-                { authRoutes.map(({ path, Component }) => (
-                    <Route key={path} path={path} element={<Component />} />
-                ))}
 
                 <Route path="*" element={<Navigate to={MAIN} replace />} />
             </Routes>
-
 
     );
 };

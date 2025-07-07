@@ -4,18 +4,6 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   server: {
-    host: true,
-    port: 5173,
-    fs: {
-      strict: false,
-    },
-    middlewareMode: false,
-    allowedHosts: [
-      'app.rasputinapi.ru',
-    ],
-    watch: {
-      usePolling: true,
-    },
-    historyApiFallback: true,
-  },
-});
+    allowedHosts: ["28f67dc2da04.ngrok-free.app", '127.0.0.1'],
+  }
+})
