@@ -38,12 +38,11 @@ const AppRouter = () => {
     }, []);
 
     if (!isInitialized) {
-        return <div>Загрузка…</div>;
+        return <div className="fixed inset-0 z-[9999] bg-white/40 backdrop-blur-md transition-opacity duration-200 pointer-events-none opacity-100" />;
     }
 
 
     return (
-
             <Routes>
                 {isAuth && authorise.map(({ path, Component }) => (
                     <Route
@@ -60,7 +59,6 @@ const AppRouter = () => {
 
                 <Route path="*" element={<Navigate to={MAIN} replace />} />
             </Routes>
-
     );
 };
 
