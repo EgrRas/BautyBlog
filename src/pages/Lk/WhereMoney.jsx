@@ -99,6 +99,7 @@ const WhereMoney = () => {
         }
 
         setIsLoading(true);
+        setIsReady(true);
 
         try {
             const response = await payNotify();
@@ -117,8 +118,17 @@ const WhereMoney = () => {
             try {
                 const info = await payInfo();
 
-                if (info.status === 200) {
+                setIsLoading(true);
+
+                if (info.status === 200 && info.data.payment_status	=== "paid") {
                     nav(LK);
+                    return;
+                }
+
+                if (info.status === 200 && info.data.payment_status	=== "failed") {
+                    setIsLoading(false);
+                    setStep(1);
+                    setError(true);
                     return;
                 }
 
