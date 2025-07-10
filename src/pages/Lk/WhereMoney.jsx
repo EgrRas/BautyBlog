@@ -42,12 +42,13 @@ const WhereMoney = () => {
 
     const payNotify = async () => {
         try {
-            const {response} = await $authHost.post("payment/notify");
+            const response = await $authHost.post("payment/notify");
             return response;
         } catch (error) {
-            console.log(error);
+            console.error("PayNotify error:", error);
+            throw error;
         }
-    }
+    };
 
     const payInfo = async () => {
         try {
@@ -67,18 +68,23 @@ const WhereMoney = () => {
 
     const getPaymentStatus = async () => {
         setIsLoading(true);
-        const response = await getInfo();
+        try {
+            const response = await getInfo();
 
-        if (response.status === 403) {
-            setStep(1);
-        } else if (response.status === 404 || response.status === 200) {
-            nav(LK);
-        } else {
-            setStep(0);
+            if (response.status === 403) {
+                setStep(1);
+                return { step: 1 };
+            } else if (response.status === 404 || response.status === 200) {
+                nav(LK);
+            } else {
+                setStep(0);
+                return { step: 0 };
+            }
+        } finally {
+            setIsLoading(false);
         }
-
-        setIsLoading(false);
     };
+
 
     const getPayment = async () => {
         const response = await getLink();
@@ -89,47 +95,93 @@ const WhereMoney = () => {
         }
     };
 
-    const paymentCheck = async () => {
-        if (status === "ok") {
-            setIsLoading(true);
+    let pollingActive = false; // глобальная переменная или вынеси в useRef, если нужно
 
-            const response = await payNotify();
-            if (!response || response.status !== 200) {
-                setIsLoading(false);
-                setStep(1);
-                setError(true);
-                return;
+    const paymentCheck = async () => {
+        if (pollingActive) {
+            console.warn("Polling already in progress. Skipping new call.");
+            return;
+        }
+
+        pollingActive = true;
+        setIsLoading(true);
+        setError(false);
+
+        try {
+            const notifyResponse = await payNotify();
+
+            if (!notifyResponse || ![200, 204].includes(notifyResponse.status)) {
+                throw new Error(`Notify failed with status: ${notifyResponse?.status}`);
             }
 
             let attempts = 0;
-            const maxAttempts = 100;
+            const maxAttempts = 20;
+            const interval = 1000;
+            let intervalId;
 
-            const intervalId = setInterval(async () => {
-                const info = await payInfo();
-                if (info.status === 200) {
-                    clearInterval(intervalId);
-                    nav(LK);
-                }
+            const poll = async () => {
+                try {
+                    const info = await payInfo();
 
-                if (++attempts > maxAttempts) {
+                    if (!info || typeof info.status !== "number") {
+                        throw new Error("Invalid payInfo structure");
+                    }
+
+                    console.log(`Polling attempt ${attempts + 1}/${maxAttempts}, status: ${info.status}`);
+
+                    if ([200, 204].includes(info.status)) {
+                        clearInterval(intervalId);
+                        pollingActive = false;
+                        nav(LK);
+                    } else if (++attempts >= maxAttempts) {
+                        clearInterval(intervalId);
+                        pollingActive = false;
+                        setError(true);
+                    }
+                } catch (err) {
+                    console.error("Polling error:", err);
                     clearInterval(intervalId);
-                    setIsLoading(false);
+                    pollingActive = false;
                     setError(true);
+                } finally {
+                    setIsLoading(false);
                 }
-            }, 5000);
-        } else {
+            };
+
+            // Делаем первый вызов с небольшой задержкой — чтобы не обгонять refresh
+            setTimeout(() => {
+                poll();
+                intervalId = setInterval(poll, interval);
+            }, 1000);
+
+            return () => {
+                if (intervalId) clearInterval(intervalId);
+                pollingActive = false;
+            };
+        } catch (error) {
+            console.error("Payment check failed:", error);
             setIsLoading(false);
             setStep(1);
             setError(true);
+            pollingActive = false;
         }
     };
 
-    useEffect(() => { getPaymentStatus() }, [])
-
     useEffect(() => {
-        if (status === "ok" || status === "fail") paymentCheck()
-    }, [])
+        let cleanup;
 
+        const checkAndPoll = async () => {
+            const info = await getPaymentStatus();
+            if (info?.step === 0 || status !== "ok") return;
+            cleanup = await paymentCheck();
+        };
+
+        checkAndPoll();
+
+        return () => {
+            if (typeof cleanup === "function") cleanup();
+        };
+    }, [status]);
 
     return (
         <div className="w-full h-screen relative">
