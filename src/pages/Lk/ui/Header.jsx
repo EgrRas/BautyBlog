@@ -83,7 +83,6 @@ const Header = () => {
             } else if (response.status === 402) {
                 nav(PAYMENT);
             } else {
-                dispatch(logout());
                 nav(PAYMENT);
             }
         } catch (error) {
@@ -208,7 +207,7 @@ const Header = () => {
 
     useEffect(() => { init(); }, []);                 // ← один-единственный эффект
 
-    // useEffect(() => {verfication()}, [])
+    useEffect(() => {verfication()}, [])
 
     return (
         <div className={`w-full lg:h-auto min-h-screen relative`}>

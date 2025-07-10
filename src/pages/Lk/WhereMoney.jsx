@@ -116,7 +116,6 @@ const WhereMoney = () => {
         const poll = async () => {
             try {
                 const info = await payInfo();
-                console.log(`Polling attempt ${attempts + 1}/${maxAttempts}, status: ${info.status}`);
 
                 if (info.status === 200) {
                     nav(LK);
@@ -129,14 +128,14 @@ const WhereMoney = () => {
                     return;
                 }
 
-                setTimeout(poll, 5000);
+                setTimeout(poll, 1000);
             } catch (error) {
                 console.error("Polling error:", error);
                 if (++attempts >= maxAttempts) {
                     setError(true);
                     setIsLoading(false);
                 } else {
-                    setTimeout(poll, 5000);
+                    setTimeout(poll, 1000);
                 }
             }
         };
