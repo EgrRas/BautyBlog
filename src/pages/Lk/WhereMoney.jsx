@@ -42,13 +42,12 @@ const WhereMoney = () => {
 
     const payNotify = async () => {
         try {
-            const response = await $authHost.post("payment/notify");
+            const {response} = await $authHost.post("payment/notify");
             return response;
         } catch (error) {
-            console.error("PayNotify error:", error);
-            throw error;
+            console.log(error);
         }
-    };
+    }
 
     const payInfo = async () => {
         try {
@@ -68,22 +67,19 @@ const WhereMoney = () => {
 
     const getPaymentStatus = async () => {
         setIsLoading(true);
-        try {
-            const response = await getInfo();
-            if (response.status === 403) {
-                setStep(1);
-                return { step: 1 };
-            } else if (response.status === 404 || response.status === 200) {
-                nav(LK);
-            } else {
-                setStep(0);
-                return { step: 0 };
-            }
-        } finally {
-            setIsLoading(false);
-        }
-    };
+        const response = await getInfo();
 
+        if (response.status === 403) {
+            setStep(1);
+        } else if (response.status === 404 || response.status === 200) {
+            nav(LK , { replace: true });
+        } else {
+            setStep(0);
+        }
+        setIsReady(true);
+
+        setIsLoading(false);
+    };
 
     const getPayment = async () => {
         const response = await getLink();
@@ -94,93 +90,72 @@ const WhereMoney = () => {
         }
     };
 
-    let pollingActive = false; // глобальная переменная или вынеси в useRef, если нужно
-
     const paymentCheck = async () => {
-        if (pollingActive) {
-            console.warn("Polling already in progress. Skipping new call.");
+        if (status !== "ok") {
+            setIsLoading(false);
+            setError(true);
+            setStep(1);
             return;
         }
 
-        pollingActive = true;
         setIsLoading(true);
-        setError(false);
 
         try {
-            const notifyResponse = await payNotify();
+            const response = await payNotify();
 
-            if (!notifyResponse || ![200, 204].includes(notifyResponse.status)) {
-                throw new Error(`Notify failed with status: ${notifyResponse?.status}`);
+            if (!response || (response.status !== 200 && response.status !== 204)) {
+                console.warn("payNotify вернул неожиданный статус:", response?.status);
             }
-
-            let attempts = 0;
-            const maxAttempts = 20;
-            const interval = 1000;
-            let intervalId;
-
-            const poll = async () => {
-                try {
-                    const info = await payInfo();
-
-                    if (!info || typeof info.status !== "number") {
-                        throw new Error("Invalid payInfo structure");
-                    }
-
-                    console.log(`Polling attempt ${attempts + 1}/${maxAttempts}, status: ${info.status}`);
-
-                    if ([200, 204].includes(info.status)) {
-                        clearInterval(intervalId);
-                        pollingActive = false;
-                        nav(LK);
-                    } else if (++attempts >= maxAttempts) {
-                        clearInterval(intervalId);
-                        pollingActive = false;
-                        setError(true);
-                    }
-                } catch (err) {
-                    console.error("Polling error:", err);
-                    clearInterval(intervalId);
-                    pollingActive = false;
-                    setError(true);
-                } finally {
-                    setIsLoading(false);
-                }
-            };
-
-            // Делаем первый вызов с небольшой задержкой — чтобы не обгонять refresh
-            setTimeout(() => {
-                poll();
-                intervalId = setInterval(poll, interval);
-            }, 1000);
-
-            return () => {
-                if (intervalId) clearInterval(intervalId);
-                pollingActive = false;
-            };
         } catch (error) {
-            console.error("Payment check failed:", error);
-            setIsLoading(false);
-            setStep(1);
-            setError(true);
-            pollingActive = false;
+            console.warn("payNotify упал, продолжаем polling:", error?.response?.status || error);
         }
+
+        const maxAttempts = 20;
+        let attempts = 0;
+
+        const poll = async () => {
+            try {
+                const info = await payInfo();
+                console.log(`Polling attempt ${attempts + 1}/${maxAttempts}, status: ${info.status}`);
+
+                if (info.status === 200) {
+                    nav(LK);
+                    return;
+                }
+
+                if (++attempts >= maxAttempts) {
+                    setError(true);
+                    setIsLoading(false);
+                    return;
+                }
+
+                setTimeout(poll, 5000);
+            } catch (error) {
+                console.error("Polling error:", error);
+                if (++attempts >= maxAttempts) {
+                    setError(true);
+                    setIsLoading(false);
+                } else {
+                    setTimeout(poll, 5000);
+                }
+            }
+        };
+
+        poll();
     };
 
     useEffect(() => {
-        let cleanup;
+        if (status === "ok") {
+            paymentCheck();
+        } else if (status === "fail") {
+            setError(true);
+            getPaymentStatus();
+        } else {
+            getPaymentStatus();
+        }
+    }, []);
 
-        const checkAndPoll = async () => {
-            const info = await getPaymentStatus();
-            if (info?.step === 0 || status !== "ok") return;
-            cleanup = await paymentCheck();
-        };
-
-        checkAndPoll();
-
-        return () => {
-            if (typeof cleanup === "function") cleanup();
-        };
-    }, [status]);
+    if (!isReady) return null;
 
     return (
         <div className="w-full h-screen relative">

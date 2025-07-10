@@ -43,22 +43,22 @@ const AppRouter = () => {
 
 
     return (
-            <Routes>
-                {isAuth && authorise.map(({ path, Component }) => (
-                    <Route
-                        key={path}
-                        path={path}
-                        element={
+        <Routes>
+            {isAuth && authorise.map(({ path, Component }) => (
+                <Route
+                    key={path}
+                    path={path}
+                    element={
                         <Component />
-                        }
-                    />
-                ))}
-                {nonAuthorise.map(({ path, Component }) => (
-                    <Route key={path} path={path} element={<Component />} />
-                ))}
+                    }
+                />
+            ))}
+            {nonAuthorise.map(({ path, Component }) => (
+                <Route key={path} path={path} element={<Component />} />
+            ))}
 
-                <Route path="*" element={<Navigate to={MAIN} replace />} />
-            </Routes>
+            <Route path="*" element={<Navigate to={MAIN} replace />} />
+        </Routes>
     );
 };
 
