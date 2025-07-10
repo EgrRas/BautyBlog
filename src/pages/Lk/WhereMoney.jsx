@@ -9,7 +9,7 @@ const WhereMoney = () => {
     const nav = useNavigate();
     const [isLoading, setIsLoading] = React.useState(false);
     const [error, setError] = React.useState(false);
-
+    const [isReady,   setIsReady]   = React.useState(false);
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const status = queryParams.get("status");
@@ -70,7 +70,6 @@ const WhereMoney = () => {
         setIsLoading(true);
         try {
             const response = await getInfo();
-
             if (response.status === 403) {
                 setStep(1);
                 return { step: 1 };

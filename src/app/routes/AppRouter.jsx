@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react';
+import React, { useLayoutEffect} from 'react';
 import {Routes, Route, Navigate} from 'react-router-dom';
 import { MAIN} from './constans.js';
 import { nonAuthorise, authorise } from './routes.js';
@@ -13,7 +13,7 @@ const AppRouter = () => {
     const isInitialized = useSelector(selectIsInitialized);
 
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const tryRestoreSession = async () => {
             const accessToken = localStorage.getItem("access_token");
             if (!accessToken) {
