@@ -9,7 +9,7 @@ const WhereMoney = () => {
     const nav = useNavigate();
     const [isLoading, setIsLoading] = React.useState(false);
     const [error, setError] = React.useState(false);
-
+    const [isReady,   setIsReady]   = React.useState(false);
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const status = queryParams.get("status");
@@ -72,10 +72,11 @@ const WhereMoney = () => {
         if (response.status === 403) {
             setStep(1);
         } else if (response.status === 404 || response.status === 200) {
-            nav(LK);
+            nav(LK , { replace: true });
         } else {
             setStep(0);
         }
+        setIsReady(true);
 
         setIsLoading(false);
     };
@@ -124,11 +125,14 @@ const WhereMoney = () => {
         }
     };
 
+
     useEffect(() => { getPaymentStatus() }, [])
 
     useEffect(() => {
         if (status === "ok" || status === "fail") paymentCheck()
     }, [])
+
+    if (!isReady) return null;
 
 
     return (
