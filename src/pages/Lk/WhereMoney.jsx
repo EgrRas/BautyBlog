@@ -42,8 +42,8 @@ const WhereMoney = () => {
 
     const payNotify = async () => {
         try {
-            const {response} = await $authHost.post("payment/notify");
-            return response;
+            const {data} = await $authHost.post("payment/notify");
+            return data;
         } catch (error) {
             console.log(error);
         }

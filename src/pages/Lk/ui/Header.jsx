@@ -190,9 +190,11 @@ const Header = () => {
                 setCanUpload(styleRes.data.can_upload_photos);
                 setStep(2);
             } else if (styleRes.status === 404) {
-                setStep( user.first_name ? 1 : 0 );         // если профиля ещё нет
+                setStep( user.first_name ? 1 : 0 );
             } else if (styleRes.status === 402) {
                 nav(PAYMENT);
+            }    else if (styleRes.status === 403) {
+                setStep(1);
             } else {
                 dispatch(logout());
                 nav(PAYMENT);
