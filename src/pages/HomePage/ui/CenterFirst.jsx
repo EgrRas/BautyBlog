@@ -31,7 +31,7 @@ const CenterFirst = () => {
                 </p>
                 <div className="relative w-full mt-5 flex justify-center">
                     <div className="absolute left-0 top-0">
-                        <p className="lg:w-[224px] w-full font-montserrat font-normal text-[12px] uppercase border-x border-black px-5 py-5 rounded-2xl text-center">
+                        <p className="lg:w-[224px] text-[#1B3C4D] w-full font-montserrat font-normal text-[12px] uppercase border-x border-[#1B3C4D] px-5 py-5 rounded-2xl text-center">
                             <span className="font-bold">В подарок</span> ты получишь мини-гайд о своем типаже
                         </p>
                     </div>

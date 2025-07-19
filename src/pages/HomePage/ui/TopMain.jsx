@@ -76,7 +76,7 @@ const TopMain = () => {
 
             <img className="h-full w-[30%]  z-10 absolute top-0 left-0 lg:block hidden" src="/photos/main/LeftBlur.webp" alt="" />
             <img className="h-full w-[30%]  z-10 absolute top-0 right-0 lg:block hidden" src="/photos/main/Rectangle.webp" alt="" />
-            <div className="backdrop-blur-sm bg-black/5 z-30 w-full lg:h-[100px] h-[60px] absolute top-0 left-0 flex flex-row items-center justify-between lg:px-20 px-5">
+            <div className="backdrop-blur-sm md:bg-black/0 bg-black/10 z-30 w-full lg:h-[100px] h-[60px] absolute top-0 left-0 flex flex-row items-center justify-between lg:px-20 px-5">
                 <img src="/photos/main/Profile.svg" className="h-[20px] lg:hidden block cursor-pointer" alt="" onClick={() => nav(PAYMENT)}/>
 
                 <p className="font-headingnowtrial text-[#FFFFFF] cursor-pointer" onClick={() => nav(MAIN)}>MNEIDET</p>
